@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#F4EEDB"/>
+  <rect x="25" y="25" width="750" height="450" rx="26" fill="none" stroke="#12385B" stroke-width="8" stroke-dasharray="18 18"/>
+  <path d="M180 330C270 205 405 410 610 170" fill="none" stroke="#2477D4" stroke-width="14" stroke-linecap="round" stroke-dasharray="15 20"/>
+  <circle cx="170" cy="340" r="30" fill="#FFC928" stroke="#12385B" stroke-width="8"/>
+  <text x="400" y="105" text-anchor="middle" fill="#12385B" font-family="system-ui,sans-serif" font-size="28" font-weight="700">ILLUSTRATION ASSET REQUIRED</text>
+  <text x="400" y="145" text-anchor="middle" fill="#66788A" font-family="system-ui,sans-serif" font-size="20">Replace this placeholder before final visual approval</text>
+</svg>

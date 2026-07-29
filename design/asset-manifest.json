@@ -1,0 +1,45 @@
+{
+  "branding": {
+    "logo": "/assets/branding/logo-primary.webp",
+    "mascotHero": "/assets/branding/mascot-hero.webp",
+    "mascotAvatar": "/assets/branding/mascot-avatar.webp"
+  },
+  "mascot": {
+    "idle": "/assets/mascot/mascot-idle.webp",
+    "charge67": "/assets/mascot/mascot-charge67.webp",
+    "skillSign": "/assets/mascot/mascot-skill-sign.webp",
+    "aim": "/assets/mascot/mascot-aim.webp",
+    "fail": "/assets/mascot/mascot-fail.webp",
+    "win": "/assets/mascot/mascot-win.webp",
+    "think": "/assets/mascot/mascot-think.webp"
+  },
+  "backgrounds": {
+    "landing": "/assets/backgrounds/landing-bg.webp",
+    "worldMap": "/assets/backgrounds/world-map-bg.webp",
+    "projectileHub": "/assets/backgrounds/projectile-hub-bg.webp",
+    "gameplayTexture": "/assets/backgrounds/gameplay-overlay-texture.webp"
+  },
+  "islands": {
+    "projectile": "/assets/islands/island-projectile.webp",
+    "momentumLocked": "/assets/islands/island-momentum-locked.webp",
+    "balance67Locked": "/assets/islands/island-balance67-locked.webp",
+    "frictionLocked": "/assets/islands/island-friction-locked.webp",
+    "energyLocked": "/assets/islands/island-energy-locked.webp"
+  },
+  "gameplay": {
+    "launcher": "/assets/gameplay/launcher.webp",
+    "projectileOrb": "/assets/gameplay/projectile-orb.webp",
+    "wallBlock": "/assets/gameplay/wall-block.webp",
+    "target": "/assets/gameplay/target.webp",
+    "trajectoryDot": "/assets/gameplay/trajectory-dot.webp",
+    "chargeEffect": "/assets/gameplay/effect-67-charge.webp",
+    "visionEffect": "/assets/gameplay/effect-skill-vision.webp"
+  },
+  "ui": {
+    "energyFrame": "/assets/ui/energy-frame.svg",
+    "skillSlot": "/assets/ui/skill-slot.svg",
+    "lock": "/assets/ui/lock.svg",
+    "projectileBadge": "/assets/ui/badge-projectile-rookie.webp",
+    "bossPreview": "/assets/ui/card-boss-preview.webp"
+  }
+}
