@@ -1,13 +1,41 @@
 import { useState } from 'react'
-import { assets, type AssetPath } from '../assets'
+import type { AssetPath } from '../assets'
 
 type IllustratedAssetProps = {
   src: AssetPath
+  debugSrc?: AssetPath
   alt: string
   className?: string
 }
 
-export function IllustratedAsset({ src, alt, className = '' }: IllustratedAssetProps) {
-  const [failed, setFailed] = useState(false)
-  return <img className={className} src={failed ? assets.ui.placeholder : src} alt={failed ? `${alt} (รอ asset illustration)` : alt} onError={() => setFailed(true)} />
+export function IllustratedAsset({
+  src,
+  debugSrc,
+  alt,
+  className = '',
+}: IllustratedAssetProps) {
+  const candidates = [src, debugSrc].filter(Boolean) as AssetPath[]
+  const [candidateIndex, setCandidateIndex] = useState(0)
+  const activeSrc = candidates[candidateIndex]
+
+  if (!activeSrc) {
+    return (
+      <span
+        className={`${className} neutral-asset-fallback`}
+        role="img"
+        aria-label={alt}
+        data-asset-path="neutral-css-fallback"
+      />
+    )
+  }
+
+  return (
+    <img
+      className={className}
+      src={activeSrc}
+      alt={alt}
+      data-asset-path={activeSrc}
+      onError={() => setCandidateIndex((index) => index + 1)}
+    />
+  )
 }

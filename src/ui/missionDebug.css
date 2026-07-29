@@ -1,0 +1,274 @@
+.mission-flow {
+  position: relative;
+}
+
+.gameplay-field {
+  position: relative;
+  min-height: clamp(320px, 48vh, 520px);
+  overflow: hidden;
+  border: 3px solid var(--color-navy, #17345b);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, #a9e7ff 0 67%, #74cf82 67% 100%);
+  box-shadow: 0 18px 40px rgb(23 52 91 / 18%);
+  touch-action: none;
+}
+
+.mission-object {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mission-launcher {
+  left: 7%;
+  bottom: 8%;
+  width: clamp(82px, 12vw, 150px);
+  height: clamp(82px, 12vw, 150px);
+}
+
+.mission-projectile {
+  left: calc(var(--projectile-x, 14) * 1%);
+  bottom: calc(var(--projectile-y, 19) * 1%);
+  width: clamp(38px, 5vw, 64px);
+  height: clamp(38px, 5vw, 64px);
+  transform: translate(-50%, 50%);
+  filter: drop-shadow(0 8px 7px rgb(23 52 91 / 25%));
+}
+
+.mission-wall {
+  left: 49%;
+  bottom: 8%;
+  width: clamp(72px, 9vw, 118px);
+  height: 42%;
+}
+
+.mission-target {
+  right: 7%;
+  bottom: 9%;
+  width: clamp(72px, 9vw, 116px);
+  height: clamp(72px, 9vw, 116px);
+}
+
+.mission-trajectory {
+  inset: 7% 7% 12% 8%;
+  z-index: 2;
+  width: 85%;
+  height: 76%;
+  opacity: 0.9;
+}
+
+.mission-effect {
+  position: absolute;
+  z-index: 4;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.mission-energy-effect {
+  left: 50%;
+  top: 48%;
+  width: min(52%, 420px);
+  transform: translate(-50%, -50%);
+  animation: debug-pulse 600ms ease-in-out infinite alternate;
+}
+
+.mission-vision-effect {
+  inset: 5%;
+  width: 90%;
+  height: 85%;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+  animation: debug-vision 1.8s ease-in-out infinite alternate;
+}
+
+.gameplay-hud {
+  position: absolute;
+  z-index: 6;
+  top: 14px;
+  left: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(92px, auto));
+  gap: 8px;
+  padding: 10px 12px;
+  border: 2px solid rgb(255 255 255 / 72%);
+  border-radius: 16px;
+  color: white;
+  background: rgb(23 52 91 / 86%);
+  box-shadow: 0 8px 24px rgb(23 52 91 / 22%);
+  backdrop-filter: blur(8px);
+}
+
+.gameplay-hud span {
+  display: grid;
+  gap: 1px;
+}
+
+.gameplay-hud small {
+  opacity: 0.74;
+}
+
+.shot-feedback {
+  position: absolute;
+  z-index: 7;
+  right: 14px;
+  top: 14px;
+  padding: 9px 14px;
+  border: 2px solid white;
+  border-radius: 999px;
+  color: white;
+  font-weight: 900;
+  background: #17345b;
+}
+
+.shot-feedback.is-hit {
+  background: #178a58;
+}
+
+.shot-feedback.is-miss {
+  background: #c34a4a;
+}
+
+.drag-guide {
+  position: absolute;
+  z-index: 5;
+  left: 14%;
+  bottom: 20%;
+  width: var(--guide-length, 120px);
+  height: 5px;
+  border-radius: 999px;
+  transform: rotate(calc(var(--guide-angle, 45) * -1deg));
+  transform-origin: left center;
+  background: repeating-linear-gradient(90deg, white 0 12px, transparent 12px 20px);
+  filter: drop-shadow(0 2px 2px rgb(23 52 91 / 50%));
+}
+
+.attempt-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.attempt-chip {
+  padding: 12px;
+  border: 2px solid rgb(23 52 91 / 15%);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 82%);
+}
+
+.visual-debug-panel {
+  position: fixed;
+  z-index: 100;
+  right: 14px;
+  bottom: 14px;
+  width: min(380px, calc(100vw - 28px));
+  max-height: min(72vh, 620px);
+  overflow: auto;
+  padding: 14px;
+  border: 2px solid #78dcff;
+  border-radius: 18px;
+  color: #f6fbff;
+  background: rgb(11 28 52 / 95%);
+  box-shadow: 0 18px 50px rgb(0 0 0 / 36%);
+  font: 500 13px/1.35 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.visual-debug-panel h2 {
+  margin: 0 0 10px;
+  color: #ffdf5d;
+  font-size: 16px;
+}
+
+.visual-debug-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+}
+
+.visual-debug-attempts,
+.visual-debug-assets {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(255 255 255 / 18%);
+}
+
+.visual-debug-assets code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #a9e7ff;
+}
+
+.visual-debug-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.visual-debug-controls button {
+  min-height: 38px;
+  border: 1px solid #78dcff;
+  border-radius: 10px;
+  color: #f6fbff;
+  background: #17345b;
+  cursor: pointer;
+}
+
+.visual-debug-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.visual-debug-reason {
+  margin: 8px 0 0;
+  color: #ffcb86;
+}
+
+.neutral-asset-fallback {
+  display: block;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #bcecff, #68c8c1);
+  box-shadow: inset 0 -10px 0 rgb(23 52 91 / 12%);
+}
+
+.is-visual-debug .mission-object,
+.is-visual-debug .mission-effect {
+  outline: 2px dashed rgb(255 77 143 / 88%);
+  outline-offset: 2px;
+}
+
+@keyframes debug-pulse {
+  to {
+    transform: translate(-50%, -50%) scale(1.08);
+    filter: brightness(1.18);
+  }
+}
+
+@keyframes debug-vision {
+  to {
+    opacity: 0.95;
+  }
+}
+
+@media (max-width: 720px) {
+  .gameplay-field {
+    min-height: 360px;
+  }
+
+  .gameplay-hud {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-debug-panel {
+    max-height: 55vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mission-effect {
+    animation: none;
+  }
+}

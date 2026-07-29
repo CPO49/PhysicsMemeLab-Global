@@ -1,6 +1,104 @@
-import type { GestureMode, SkillState } from '../../learning/gameSession'
+import type {
+  GestureMode,
+  SkillState,
+} from '../../learning/gameSession'
+import { th } from '../../content/th'
 
-export function EnergyBar({ energy }: { energy: number }) { return <section className="energy-bar" aria-label={`พลัง 67 ${energy}%`}><b>67 ENERGY</b><span><i style={{ width: `${energy}%` }} /></span><strong>{energy}%</strong></section> }
-export function SkillSlot({ state }: { state: SkillState }) { return <section className="skill-slot" aria-label="สกิล Trajectory Vision"><b>◈</b><div><strong>Trajectory Vision</strong><small>{state === 'ready' ? 'พร้อมใช้' : state === 'active' ? 'กำลังแสดงวิถี' : 'เติมพลัง 67 ให้เต็ม'}</small></div></section> }
-export function GesturePrompt({ mode, onPump, onSkill }: { mode: GestureMode; onPump: () => void; onSkill: () => void }) { return <section className="gesture-prompt"><strong>Gesture Lab · {mode === 'skill-sign' ? 'ประกบมือ → กางมือ' : 'ท่า 67 เพื่อเติมพลัง'}</strong><div><button type="button" onClick={onPump}>กด Space / Pump 67</button><button type="button" onClick={onSkill}>กด Enter / Skill Sign</button></div><small>Mouse/Keyboard fallback พร้อมใช้งาน · ไม่บันทึกภาพกล้อง</small></section> }
-export function TrajectoryVisionOverlay({ active }: { active: boolean }) { return active ? <div className="trajectory-vision" role="status"><b>TRAJECTORY VISION</b><span>⌒⌒⌒</span><small>ตัวอย่างวิถีและจุดสูงสุด · placeholder สำหรับ physics integration</small></div> : null }
+type EnergyBarProps = {
+  value?: number
+  energy?: number
+  large?: boolean
+  pulsing?: boolean
+}
+
+export function EnergyBar({
+  value,
+  energy,
+  large = false,
+  pulsing = false,
+}: EnergyBarProps) {
+  const resolvedValue = value ?? energy ?? 0
+
+  return (
+    <section className={`energy-bar ${large ? 'energy-bar-large' : ''} ${pulsing ? 'is-pulsing' : ''}`}>
+      <div className="hud-label-row">
+        <strong>{th.energy}</strong>
+        <span>{Math.round(resolvedValue)}%</span>
+      </div>
+      <div
+        className="energy-track"
+        role="progressbar"
+        aria-label={th.energy}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(resolvedValue)}
+      >
+        <span style={{ width: `${resolvedValue}%` }} />
+      </div>
+    </section>
+  )
+}
+
+export function SkillSlot({
+  skill,
+  state,
+}: {
+  skill?: SkillState
+  state?: SkillState
+}) {
+  const resolvedSkill = skill ?? state ?? 'locked'
+  const stateLabel =
+    resolvedSkill === 'active'
+      ? th.visionActive
+      : resolvedSkill === 'ready' || resolvedSkill === 'sign-step-1'
+        ? th.ready
+        : th.charging
+
+  return (
+    <section className={`skill-slot skill-${resolvedSkill}`}>
+      <span className="skill-slot-icon" aria-hidden="true">
+        67
+      </span>
+      <span>
+        <small>{th.skill}</small>
+        <strong>Trajectory Vision</strong>
+        <em>{stateLabel}</em>
+      </span>
+    </section>
+  )
+}
+
+type GesturePromptProps = {
+  children?: React.ReactNode
+  mode?: GestureMode
+  onPump?: () => void
+  onSkill?: () => void
+}
+
+export function GesturePrompt({
+  children,
+  mode,
+  onPump,
+  onSkill,
+}: GesturePromptProps) {
+  if (children) return <p className="gesture-prompt">{children}</p>
+
+  return (
+    <section className="gesture-prompt">
+      <span>{mode ?? 'idle'}</span>
+      {onPump && <button onClick={onPump}>{th.pumpButton}</button>}
+      {onSkill && <button onClick={onSkill}>{th.skillButton}</button>}
+    </section>
+  )
+}
+
+export function TrajectoryVisionOverlay({ active }: { active: boolean }) {
+  if (!active) return null
+
+  return (
+    <div className="trajectory-vision-status" role="status">
+      <strong>Trajectory Vision</strong>
+      <span>{th.visionActive}</span>
+    </div>
+  )
+}
