@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import {
   activateTrajectoryVision,
   addPump,
@@ -19,15 +19,29 @@ import { PaperCard } from './ui/components/PaperCard'
 import { TopBar } from './ui/components/TopBar'
 import { ProjectileMission } from './ui/ProjectileMission'
 import './ui/landing/Landing.css'
+import './ui/landing/FinalLandingMap.css'
 
 type Screen = 'landing' | 'map' | 'hub' | 'mission'
+type IslandStatus = 'active' | 'locked' | 'coming-soon'
 
 type Island = {
   name: string
-  topic: string
+  localName: string
   asset: string
   debugAsset: string
-  playable?: boolean
+  status: IslandStatus
+  stars: number
+  isNew?: boolean
+  position: {
+    x: number
+    y: number
+    scale?: number
+  }
+}
+
+type MapProgress = {
+  completed: number
+  total: number
 }
 
 const debugAssets = {
@@ -39,41 +53,70 @@ const debugAssets = {
 const islands: Island[] = [
   {
     name: 'Projectile Island',
-    topic: th.projectile,
-    asset: assets.islands.projectile,
+    localName: th.islandProjectile,
+    asset: assets.final.worldMap.islands.projectile,
     debugAsset: debugAssets.projectileIsland,
-    playable: true,
+    status: 'active',
+    stars: 0,
+    isNew: true,
+    position: { x: 17, y: 69, scale: 1.04 },
   },
   {
     name: 'Momentum Island',
-    topic: th.momentum,
-    asset: assets.islands.momentumLocked,
+    localName: th.islandMomentum,
+    asset: assets.final.worldMap.islands.momentum,
     debugAsset: debugAssets.lockedIsland,
-  },
-  {
-    name: 'Balance 67',
-    topic: th.balance,
-    asset: assets.islands.balance67Locked,
-    debugAsset: debugAssets.lockedIsland,
+    status: 'locked',
+    stars: 0,
+    position: { x: 20, y: 27 },
   },
   {
     name: 'Friction Island',
-    topic: th.friction,
-    asset: assets.islands.frictionLocked,
+    localName: th.islandFriction,
+    asset: assets.final.worldMap.islands.friction,
     debugAsset: debugAssets.lockedIsland,
+    status: 'locked',
+    stars: 0,
+    position: { x: 49, y: 25, scale: 0.95 },
   },
   {
     name: 'Energy Island',
-    topic: th.energyTopic,
-    asset: assets.islands.energyLocked,
+    localName: th.islandEnergy,
+    asset: assets.final.worldMap.islands.energy,
     debugAsset: debugAssets.lockedIsland,
+    status: 'locked',
+    stars: 0,
+    position: { x: 79, y: 26 },
+  },
+  {
+    name: 'Mystery Island',
+    localName: th.islandMystery,
+    asset: assets.final.worldMap.islands.mystery,
+    debugAsset: debugAssets.lockedIsland,
+    status: 'coming-soon',
+    stars: 0,
+    position: { x: 83, y: 69, scale: 0.96 },
+  },
+  {
+    name: '67 Power Island',
+    localName: th.islandPower67,
+    asset: assets.final.worldMap.islands.power67,
+    debugAsset: debugAssets.lockedIsland,
+    status: 'locked',
+    stars: 0,
+    position: { x: 50, y: 69, scale: 1.03 },
   },
 ]
+
+const mapProgress: MapProgress = {
+  completed: 0,
+  total: 1,
+}
 
 export function App() {
   const [screen, setScreen] = useState<Screen>('landing')
   const [session, setSession] = useState(initialGameSession)
-  const [preview, setPreview] = useState<string | null>(null)
+  const [preview, setPreview] = useState<Island | null>(null)
 
   const go = (next: Screen) => () => {
     setScreen(next)
@@ -84,7 +127,13 @@ export function App() {
     <main className="app">
       {screen !== 'landing' && <TopBar onMap={go('map')} />}
       {screen === 'landing' && <Landing onStart={go('map')} />}
-      {screen === 'map' && <Map onGo={go('hub')} onLocked={setPreview} />}
+      {screen === 'map' && (
+        <Map
+          onGo={go('hub')}
+          onLocked={setPreview}
+          progress={mapProgress}
+        />
+      )}
       {screen === 'hub' && (
         <Hub
           onMission={go('mission')}
@@ -105,8 +154,12 @@ export function App() {
       {preview && (
         <div className="modal-backdrop">
           <PaperCard>
-            <h2>{preview}</h2>
-            <p>{th.locked}</p>
+            <h2>{preview.localName}</h2>
+            <p>
+              {preview.status === 'coming-soon'
+                ? th.comingSoon
+                : th.locked}
+            </p>
             <Button
               href="#map"
               onClick={(event) => {
@@ -125,26 +178,33 @@ export function App() {
 
 function Landing({ onStart }: { onStart: () => void }) {
   return (
-    <section className="landing-page">
+    <section className="landing-page landing-page-final">
       <IllustratedAsset
         className="landing-background"
-        src={assets.backgrounds.landing}
+        src={assets.final.landing.background}
         alt={th.landingSceneAlt}
       />
       <div className="landing-hero">
         <div className="landing-copy">
-          <h1>Meme Physics Archipelago</h1>
+          <h1 className="visually-hidden">Meme Physics Lab 67</h1>
+          <IllustratedAsset
+            className="landing-logo-final"
+            src={assets.final.landing.logo}
+            alt={th.logoAlt}
+          />
           <p>{th.hubBody}</p>
           <Button href="#map" onClick={onStart}>
             {th.journey}
           </Button>
         </div>
-        <IllustratedAsset
-          className="landing-mascot"
-          src={assets.branding.mascotHero}
-          debugSrc={debugAssets.mascot}
-          alt={th.mascotAlt}
-        />
+        <div className="landing-mascot-stage">
+          <IllustratedAsset
+            className="landing-mascot"
+            src={assets.final.landing.mascot}
+            debugSrc={debugAssets.mascot}
+            alt={th.mascotAlt}
+          />
+        </div>
       </div>
     </section>
   )
@@ -153,47 +213,91 @@ function Landing({ onStart }: { onStart: () => void }) {
 function Map({
   onGo,
   onLocked,
+  progress,
 }: {
   onGo: () => void
-  onLocked: (name: string) => void
+  onLocked: (island: Island) => void
+  progress: MapProgress
 }) {
   return (
-    <section className="map-page">
+    <section className="map-page map-page-final">
       <div className="map-heading">
         <h1>{th.mapTitle}</h1>
+        <div className="map-state-summary" aria-label="World progress">
+          <strong>
+            {progress.completed}/{progress.total}
+          </strong>
+          <span aria-hidden="true">☆ ☆ ☆</span>
+        </div>
       </div>
-      <div className="ocean-map">
+      <div className="ocean-map ocean-map-final">
         <IllustratedAsset
           className="map-background"
-          src={assets.backgrounds.worldMap}
+          src={assets.final.worldMap.background}
           alt=""
         />
-        <svg
-          className="map-route"
-          viewBox="0 0 1000 600"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path d="M160 430 C210 300 150 210 210 140 S420 285 500 420 S700 245 780 145 S820 315 840 430" />
-        </svg>
-        {islands.map((island) => (
-          <button
-            className={`map-island ${island.playable ? 'state-active' : 'state-locked'}`}
-            key={island.name}
-            onClick={() => (island.playable ? onGo() : onLocked(island.name))}
-          >
-            <IllustratedAsset
-              className="island-art"
-              src={island.asset}
-              debugSrc={island.debugAsset}
-              alt={island.name}
-            />
-            <span className="island-label">
-              <strong>{island.name}</strong>
-              <small>{island.topic}</small>
-            </span>
-          </button>
-        ))}
+        {islands.map((island) => {
+          const islandStyle = {
+            '--island-x': `${island.position.x}%`,
+            '--island-y': `${island.position.y}%`,
+            '--island-scale': island.position.scale ?? 1,
+          } as CSSProperties
+
+          return (
+            <button
+              className={`map-island state-${island.status}`}
+              style={islandStyle}
+              key={island.name}
+              aria-label={`${island.localName}, ${island.name}`}
+              onClick={() =>
+                island.status === 'active'
+                  ? onGo()
+                  : onLocked(island)
+              }
+            >
+              <span className="island-art-frame">
+                <IllustratedAsset
+                  className="island-art"
+                  src={island.asset}
+                  debugSrc={island.debugAsset}
+                  alt=""
+                />
+                {island.isNew && (
+                  <span className="island-new-badge">NEW</span>
+                )}
+                {island.status === 'locked' && (
+                  <span
+                    className="island-lock-icon"
+                    aria-label={th.locked}
+                  />
+                )}
+                {island.status === 'coming-soon' && (
+                  <span className="island-coming-soon">
+                    Coming Soon
+                  </span>
+                )}
+              </span>
+              <span className="island-label">
+                <strong>{island.localName}</strong>
+                <small>{island.name}</small>
+                <span
+                  className="island-stars"
+                  aria-label={`${island.stars} stars`}
+                >
+                  {[0, 1, 2].map((star) => (
+                    <span
+                      className={star < island.stars ? 'is-earned' : ''}
+                      key={star}
+                      aria-hidden="true"
+                    >
+                      ★
+                    </span>
+                  ))}
+                </span>
+              </span>
+            </button>
+          )
+        })}
       </div>
     </section>
   )
