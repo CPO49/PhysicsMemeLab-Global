@@ -1,0 +1,149 @@
+/* Milestone G.1: approved Landing and World Map composition. */
+.landing-page-final .landing-hero {
+  grid-template-columns: minmax(0, 0.68fr) minmax(0, 1fr);
+  gap: clamp(18px, 2.5vw, 52px);
+  width: min(calc(100% - 72px), 1720px);
+  padding: clamp(20px, 3.2vh, 46px) 0;
+}
+
+.landing-page-final .landing-copy {
+  display: flex;
+  max-width: 500px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.landing-page-final .landing-logo-final {
+  width: clamp(360px, 24vw, 460px);
+  max-width: 100%;
+  max-height: none;
+}
+
+.landing-page-final .landing-copy p {
+  max-width: 430px;
+  margin: 8px 0 20px;
+  font-size: clamp(0.98rem, 1.05vw, 1.16rem);
+  line-height: 1.52;
+}
+
+.landing-page-final .landing-copy .button {
+  width: clamp(280px, 17vw, 340px);
+  min-height: 58px;
+  box-sizing: border-box;
+  font-size: 1.08rem;
+}
+
+.landing-page-final .landing-mascot-stage {
+  height: min(94vh, 1000px);
+  justify-items: end;
+}
+
+.landing-page-final .landing-mascot {
+  width: min(112%, 900px);
+  max-height: 94vh;
+  filter: drop-shadow(0 14px 12px rgb(18 59 93 / 20%));
+}
+
+.map-page-final {
+  padding: 5px 16px 8px;
+}
+
+.map-page-final .map-heading {
+  min-height: 42px;
+}
+
+.map-page-final .map-heading h1 {
+  font-size: clamp(1.55rem, 2.35vw, 2.55rem);
+}
+
+.map-state-summary {
+  gap: 8px;
+  padding: 5px 10px;
+  font-size: 0.86rem;
+}
+
+.ocean-map-final {
+  width: min(100%, calc((100dvh - 132px) * 1.7768));
+  max-height: calc(100dvh - 132px);
+  margin-top: 3px;
+  border-radius: 30px;
+}
+
+.ocean-map.ocean-map-final .map-island {
+  width: clamp(142px, 14vw, 270px);
+}
+
+.ocean-map.ocean-map-final .map-island .island-label {
+  margin-top: 5px;
+  padding: 5px 10px 4px;
+}
+
+.island-lock-icon {
+  top: 8%;
+  right: 9%;
+  width: clamp(22px, 1.8vw, 32px);
+  border-width: 2px;
+  border-radius: 7px;
+  box-shadow: 0 3px 0 rgb(18 59 93 / 20%);
+}
+
+.island-lock-icon::before {
+  border-width: 2px;
+}
+
+.island-lock-icon::after {
+  width: 4px;
+  height: 7px;
+}
+
+.island-new-badge,
+.island-coming-soon {
+  padding: 3px 7px;
+  border-width: 2px;
+  font-size: clamp(0.52rem, 0.58vw, 0.66rem);
+}
+
+@media (max-width: 900px) {
+  .landing-page-final .landing-hero {
+    width: min(calc(100% - 40px), 1200px);
+  }
+
+  .landing-page-final .landing-logo-final {
+    width: min(100%, 400px);
+  }
+
+  .ocean-map.ocean-map-final .map-island {
+    width: clamp(118px, 15vw, 180px);
+  }
+}
+
+@media (max-width: 700px) {
+  .landing-page-final .landing-copy {
+    padding: 0;
+    background: transparent;
+  }
+
+  .landing-page-final .landing-copy .button {
+    width: min(100%, 340px);
+  }
+}
+
+/* Keep desktop Landing to the physical viewport without a scroll gutter. */
+@media (min-width: 701px) {
+  .landing-page-final,
+  .landing-page-final .landing-hero {
+    height: 100vh;
+    min-height: 100vh;
+  }
+}
+
+
+@media (min-width: 701px) {
+  .landing-page-final .landing-mascot {
+    width: min(100%, 900px);
+  }
+}

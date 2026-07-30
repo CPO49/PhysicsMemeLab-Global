@@ -20,6 +20,7 @@ import { TopBar } from './ui/components/TopBar'
 import { ProjectileMission } from './ui/ProjectileMission'
 import './ui/landing/Landing.css'
 import './ui/landing/FinalLandingMap.css'
+import './ui/landing/FinalLandingMapComposition.css'
 
 type Screen = 'landing' | 'map' | 'hub' | 'mission'
 type IslandStatus = 'active' | 'locked' | 'coming-soon'
