@@ -1,32 +1,26 @@
+import { useState } from 'react'
 import { assets } from '../assets'
 import { IllustratedAsset } from '../components/IllustratedAsset'
-import { generatedAssets } from '../generatedAssets'
+import { gameUiAssets } from '../gameUiAssets'
+import type { WorldMapIsland } from '../../data/worldMapData'
+import { worldMapIslands } from '../../data/worldMapData'
+import type { UiState, MapPanel } from '../../state/uiState'
+import type { WorldMapProgress } from '../../state/worldMapState'
 import { IslandNode } from './IslandNode'
-import type { WorldMapIsland } from './worldMapData'
-import { worldMapIslands } from './worldMapData'
+import { WorldMapHud } from './WorldMapHud'
+import { WorldMapModal } from './WorldMapModal'
 import { WorldMapSideMenu } from './WorldMapSideMenu'
-import { WorldMapTopStatus } from './WorldMapTopStatus'
+import './WorldMapPage.css'
 
-type WorldMapPageProps = {
-  onEnterProjectile: () => void
-  onLocked: (island: WorldMapIsland) => void
-}
-
-export function WorldMapPage({ onEnterProjectile, onLocked }: WorldMapPageProps) {
-  return (
-    <section className="reference-world-map" aria-label="World Map">
-      <WorldMapTopStatus />
-      <div className="reference-world-map__scene">
-        <IllustratedAsset className="reference-world-map__background" src={assets.final.worldMap.background} alt="" />
-        <div className="reference-world-map__islands">
-          {worldMapIslands.map((island) => (
-            <IslandNode key={island.id} island={island} onEnter={onEnterProjectile} onLocked={onLocked} />
-          ))}
-        </div>
-        <img className="reference-world-map__wheel" src={generatedAssets.decor.wheel} alt="" aria-hidden="true" />
-        <img className="reference-world-map__note" src={generatedAssets.decor.stickyNote} alt="" aria-hidden="true" />
-      </div>
-      <WorldMapSideMenu />
-    </section>
-  )
+type Props = { ui: UiState; progress: WorldMapProgress; onToggleProfile: () => void; onCloseOverlay: () => void; onOpenPanel: (panel: Exclude<MapPanel, null>) => void; onToggleSound: () => void; onToggleAnimations: () => void; onEnterProjectile: () => void }
+export function WorldMapPage({ ui, progress, onToggleProfile, onCloseOverlay, onOpenPanel, onToggleSound, onToggleAnimations, onEnterProjectile }: Props) {
+  const [selectedIsland, setSelectedIsland] = useState<WorldMapIsland | null>(null)
+  const openIsland = (island: WorldMapIsland) => { setSelectedIsland(island); onOpenPanel(island.status === 'coming-soon' ? 'comingSoon' : 'locked') }
+  return <section className="g3-world-map" aria-label="World Map"><IllustratedAsset className="g3-world-map__background" src={assets.final.worldMap.background} alt="" />
+    <WorldMapHud ui={ui} onToggleProfile={onToggleProfile} onCloseProfile={onCloseOverlay} />
+    <div className="g3-world-map__islands">{worldMapIslands.map((island) => <IslandNode key={island.id} island={island} progress={progress[island.id]} onEnter={onEnterProjectile} onLocked={openIsland} />)}</div>
+    <img className="g3-world-map__wheel" src="/assets/generated/decor/ship-wheel.svg" alt="" aria-hidden="true" /><img className="g3-world-map__note" src={gameUiAssets.map.note} alt="" aria-hidden="true" />
+    <WorldMapSideMenu activePanel={ui.activePanel} onOpen={onOpenPanel} />
+    <WorldMapModal panel={ui.activePanel} island={selectedIsland} ui={ui} onClose={onCloseOverlay} onToggleSound={onToggleSound} onToggleAnimations={onToggleAnimations} />
+  </section>
 }

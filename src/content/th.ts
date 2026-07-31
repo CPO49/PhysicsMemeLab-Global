@@ -57,4 +57,14 @@ export const th = {
     mouseControl: 'เล่นด้วยเมาส์', mouseControlHint: 'พร้อมเป็น fallback',
     playerName: 'DEK67', menuMissions: 'ภารกิจ', menuStats: 'สถิติของฉัน', menuCollection: 'คอลเลกชัน', menuSettings: 'ตั้งค่า', progressUnit: 'ดาว',
   },
+  g3: {
+    landingHeadline: 'ออกเดินทางในโลกของมีม\\nที่ทุกท่าทางซ่อนฟิสิกส์ไว้!',
+    landingSupport: 'ใช้มือของคุณ ทดลอง และเข้าใจมันจริง ๆ',
+    quickDemo: 'โหมดทดลองด่วน',
+    cameraReady: 'พร้อมเชื่อมต่อกล้องในขั้นถัดไป',
+    inputCamera: 'ใช้กล้อง', inputGesture: 'เล่นด้วยมือ', inputMouse: 'เล่นด้วยเมาส์ (สำรอง)',
+    inputCameraHint: 'ขยับมือเพื่อเล็ง', inputGestureHint: 'กำมือ ง้าง แล้วปล่อย', inputMouseHint: 'พร้อมเป็น fallback',
+    unlockCondition: 'เงื่อนไขปลดล็อก', close: 'ปิด', missionPanel: 'ภารกิจของฉัน', statisticsPanel: 'สถิติของฉัน', collectionPanel: 'คอลเลกชัน', settingsPanel: 'ตั้งค่า',
+    sound: 'เสียง', animations: 'แอนิเมชัน', profileGreeting: 'นักผจญภัย DEK67', comingSoonTitle: 'กำลังจะมาเร็ว ๆ นี้',
+  },
 } as const

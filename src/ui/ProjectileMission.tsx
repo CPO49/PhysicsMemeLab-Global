@@ -56,12 +56,12 @@ type DebugAdvance = {
   reason: string
 }
 
-export function ProjectileMission({ onExit }: { onExit: () => void }) {
+export function ProjectileMission({ onExit, demoMode = false }: { onExit: () => void; demoMode?: boolean }) {
   const [mission, setMission] = useState<MissionState>(initialMissionState)
   const [game, setGame] = useState<GameSession>(initialGameSession)
   const [aim, setAim] = useState<Aim>({ angle: 45, speed: 25 })
   const [dragStart, setDragStart] = useState<DragPoint | null>(null)
-  const [demo, setDemo] = useState(false)
+  const [demo, setDemo] = useState(demoMode)
   const [pulse, setPulse] = useState(false)
   const visualDebug = useMemo(
     () => new URLSearchParams(window.location.search).get('visualDebug') === '1',
