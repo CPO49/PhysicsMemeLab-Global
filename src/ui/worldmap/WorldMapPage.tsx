@@ -12,6 +12,7 @@ import { WorldMapHud } from './WorldMapHud'
 import { WorldMapModal } from './WorldMapModal'
 import { WorldMapSideMenu } from './WorldMapSideMenu'
 import './WorldMapPage.css'
+import './WorldMapPolish.css'
 
 type Props = { ui: UiState; progress: WorldMapProgress; onToggleProfile: () => void; onCloseOverlay: () => void; onOpenPanel: (panel: Exclude<MapPanel, null>) => void; onToggleSound: () => void; onToggleAnimations: () => void; onEnterProjectile: () => void }
 export function WorldMapPage({ ui, progress, onToggleProfile, onCloseOverlay, onOpenPanel, onToggleSound, onToggleAnimations, onEnterProjectile }: Props) {
