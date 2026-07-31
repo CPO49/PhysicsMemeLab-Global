@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { audioManager } from '../audio/audioManager'
 import {
   activateTrajectoryVision,
   addPump,
@@ -76,19 +77,21 @@ export function ProjectileMission({ onExit, demoMode = false }: { onExit: () => 
     setPulse(false)
   }
 
-  const pumpEnergy = () => {
+  const pumpEnergy = useCallback(() => {
+    audioManager.play('charge')
     setGame((current) => (current.energy < 100 ? addPump(current, 25) : current))
     setPulse(true)
     window.setTimeout(() => setPulse(false), 180)
-  }
+  }, [])
 
-  const advanceSkillSign = () => {
+  const advanceSkillSign = useCallback(() => {
+    audioManager.play(game.skill === 'sign-step-1' ? 'skillUnlocked' : 'click')
     setGame((current) =>
       current.skill === 'sign-step-1'
         ? activateTrajectoryVision(current)
         : startSkillSign(current),
     )
-  }
+  }, [game.skill])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -105,14 +108,16 @@ export function ProjectileMission({ onExit, demoMode = false }: { onExit: () => 
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [mission.step])
+  }, [advanceSkillSign, mission.step, pumpEnergy])
 
   const go = (step: MissionStep) => {
     setMission((current) => ({ ...current, step }))
   }
 
   const fire = () => {
+    audioManager.play('launch')
     const shot = simulateShot(aim.angle, aim.speed)
+    audioManager.play(shot.hit ? 'hit' : 'miss')
     setMission((current) => ({
       ...current,
       attempts: [...current.attempts, shot],

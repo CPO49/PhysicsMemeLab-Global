@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { audioManager } from './audio/audioManager'
 import { activateTrajectoryVision, addPump, initialGameSession, startSkillSign } from './learning/gameSession'
 import { th } from './content/th'
 import { initialUiState, closeUiOverlay, openMapPanel, toggleAnimations, toggleProfile, toggleSound } from './state/uiState'
@@ -12,6 +13,7 @@ import { TopBar } from './ui/components/TopBar'
 import { LandingPage } from './ui/landing/LandingPage'
 import { LandingLayoutStudio } from './ui/landing/LandingLayoutStudio'
 import './ui/landing/Landing.css'
+import './ui/motion.css'
 import { ProjectileMission } from './ui/ProjectileMission'
 import { WorldMapPage } from './ui/worldmap/WorldMapPage'
 
@@ -21,11 +23,19 @@ export function App() {
   const [layoutStudio, setLayoutStudio] = useState(() => window.location.pathname === '/layout-editor')
   const [screen, setScreen] = useState<Screen>('landing')
   const [session, setSession] = useState(initialGameSession)
-  const [ui, setUi] = useState(initialUiState)
+  const [ui, setUi] = useState(() => ({ ...initialUiState, soundEnabled: audioManager.getSettings().enabled }))
   const [demoMode, setDemoMode] = useState(false)
 
-  const go = (next: Screen) => () => { setScreen(next); window.scrollTo({ top: 0, behavior: 'smooth' }) }
-  const enterMission = (demo = false) => { setDemoMode(demo); setScreen('mission'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+  useEffect(() => {
+    const unlock = () => audioManager.unlock()
+    window.addEventListener('pointerdown', unlock, { once: true })
+    window.addEventListener('keydown', unlock, { once: true })
+    return () => { window.removeEventListener('pointerdown', unlock); window.removeEventListener('keydown', unlock) }
+  }, [])
+  useEffect(() => { audioManager.setScene(screen === 'landing' ? 'landing' : screen === 'map' ? 'worldMap' : 'projectile') }, [screen])
+  const go = (next: Screen) => () => { audioManager.play('click'); setScreen(next); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+  const enterMission = (demo = false) => { audioManager.play('missionStart'); setDemoMode(demo); setScreen('mission'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+  const toggleSoundSetting = () => setUi((current) => { const next = toggleSound(current); audioManager.updateSettings({ enabled: next.soundEnabled }); return next })
   const leaveLayoutStudio = () => { window.history.replaceState({}, '', '/'); setLayoutStudio(false) }
 
   if (layoutStudio) return <LandingLayoutStudio onExit={leaveLayoutStudio} onApply={leaveLayoutStudio} />
@@ -33,7 +43,7 @@ export function App() {
   return <main className="app">
     {(screen === 'hub' || screen === 'mission') && <TopBar onMap={go('map')} />}
     {screen === 'landing' && <LandingPage onStart={go('map')} onQuickDemo={() => enterMission(true)} />}
-    {screen === 'map' && <WorldMapPage ui={ui} progress={initialWorldMapProgress} onToggleProfile={() => setUi(toggleProfile)} onCloseOverlay={() => setUi(closeUiOverlay)} onOpenPanel={(panel) => setUi((current) => openMapPanel(current, panel))} onToggleSound={() => setUi(toggleSound)} onToggleAnimations={() => setUi(toggleAnimations)} onEnterProjectile={go('hub')} />}
+    {screen === 'map' && <WorldMapPage ui={ui} progress={initialWorldMapProgress} onToggleProfile={() => setUi(toggleProfile)} onCloseOverlay={() => setUi(closeUiOverlay)} onOpenPanel={(panel) => setUi((current) => openMapPanel(current, panel))} onToggleSound={toggleSoundSetting} onToggleAnimations={() => setUi(toggleAnimations)} onEnterProjectile={go('hub')} />}
     {screen === 'hub' && <Hub onMission={() => enterMission(false)} onBack={go('map')} session={session} onPump={() => setSession((current) => addPump(current, 25))} onSkill={() => setSession((current) => current.skill === 'sign-step-1' ? activateTrajectoryVision(current) : startSkillSign(current))} />}
     {screen === 'mission' && <ProjectileMission onExit={go('map')} demoMode={demoMode} />}
   </main>
