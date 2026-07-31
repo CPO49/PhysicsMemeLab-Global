@@ -10,6 +10,7 @@ import { EnergyBar, GesturePrompt, SkillSlot, TrajectoryVisionOverlay } from './
 import { IllustratedAsset } from './ui/components/IllustratedAsset'
 import { TopBar } from './ui/components/TopBar'
 import { LandingPage } from './ui/landing/LandingPage'
+import { LandingLayoutStudio } from './ui/landing/LandingLayoutStudio'
 import './ui/landing/Landing.css'
 import { ProjectileMission } from './ui/ProjectileMission'
 import { WorldMapPage } from './ui/worldmap/WorldMapPage'
@@ -17,6 +18,7 @@ import { WorldMapPage } from './ui/worldmap/WorldMapPage'
 type Screen = 'landing' | 'map' | 'hub' | 'mission'
 
 export function App() {
+  const [layoutStudio, setLayoutStudio] = useState(() => window.location.pathname === '/layout-editor')
   const [screen, setScreen] = useState<Screen>('landing')
   const [session, setSession] = useState(initialGameSession)
   const [ui, setUi] = useState(initialUiState)
@@ -24,6 +26,9 @@ export function App() {
 
   const go = (next: Screen) => () => { setScreen(next); window.scrollTo({ top: 0, behavior: 'smooth' }) }
   const enterMission = (demo = false) => { setDemoMode(demo); setScreen('mission'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+  const leaveLayoutStudio = () => { window.history.replaceState({}, '', '/'); setLayoutStudio(false) }
+
+  if (layoutStudio) return <LandingLayoutStudio onExit={leaveLayoutStudio} onApply={leaveLayoutStudio} />
 
   return <main className="app">
     {(screen === 'hub' || screen === 'mission') && <TopBar onMap={go('map')} />}

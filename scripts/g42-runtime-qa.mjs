@@ -49,7 +49,7 @@ socket.addEventListener('message', ({ data }) => {
 for (const [width, height] of sizes) {
   await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false })
   await send('Page.navigate', { url: root })
-  await pause(700)
+  await pause(1400)
   const key = `${width}x${height}`
   report.viewports[key] = JSON.parse(await evaluate(`JSON.stringify((() => {
     const root = document.querySelector('.g3-landing')
