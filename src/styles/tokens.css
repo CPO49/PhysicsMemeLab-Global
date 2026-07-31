@@ -9,4 +9,4 @@
   --border-navy: 2px solid var(--navy); --content-max: 1440px;
 }
 
-:root{--font-ui:'Anuphan','Leelawadee UI',Tahoma,sans-serif;--font-weight-regular:400;--font-weight-medium:500;--font-weight-semibold:600;--font-weight-bold:700;--font-weight-extrabold:800;}
+:root{--font-display:var(--font-ui);--weight-regular:400;--weight-medium:500;--weight-bold:700;--font-ui:'Anuphan','Leelawadee UI',Tahoma,sans-serif;--font-weight-regular:400;--font-weight-medium:500;--font-weight-semibold:600;--font-weight-bold:700;--font-weight-extrabold:800;}

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { th } from '../../content/th'
-import { landingInfo, type LandingInfoId } from './LandingInfoCards'
+import { landingInfo, type LandingInfoId } from './landingInfoData'
 
 export function LandingInfoModal({ id, onClose }: { id: LandingInfoId | null; onClose: () => void }) {
   useEffect(() => { const key = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose() }; window.addEventListener('keydown', key); return () => window.removeEventListener('keydown', key) }, [onClose])
