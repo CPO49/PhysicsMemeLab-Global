@@ -3,7 +3,7 @@ import { audioManager } from './audio/audioManager'
 import { activateTrajectoryVision, addPump, initialGameSession, startSkillSign } from './learning/gameSession'
 import { th } from './content/th'
 import { initialUiState, closeUiOverlay, openMapPanel, toggleAnimations, toggleProfile, toggleSound } from './state/uiState'
-import { initialWorldMapProgress } from './state/worldMapState'
+import { completeProjectileMission, loadGameState, saveGameState } from './state/gameState'
 import { assets } from './ui/assets'
 import { assetFallbacks } from './ui/assetFallbacks'
 import { Button } from './ui/components/Button'
@@ -25,6 +25,7 @@ export function App() {
   const [session, setSession] = useState(initialGameSession)
   const [ui, setUi] = useState(() => ({ ...initialUiState, soundEnabled: audioManager.getSettings().enabled }))
   const [demoMode, setDemoMode] = useState(false)
+  const [gameState, setGameState] = useState(loadGameState)
 
   useEffect(() => {
     const unlock = () => audioManager.unlock()
@@ -43,9 +44,9 @@ export function App() {
   return <main className="app">
     {(screen === 'hub' || screen === 'mission') && <TopBar onMap={go('map')} />}
     {screen === 'landing' && <LandingPage onStart={go('map')} onQuickDemo={() => enterMission(true)} />}
-    {screen === 'map' && <WorldMapPage ui={ui} progress={initialWorldMapProgress} onToggleProfile={() => setUi(toggleProfile)} onCloseOverlay={() => setUi(closeUiOverlay)} onOpenPanel={(panel) => setUi((current) => openMapPanel(current, panel))} onToggleSound={toggleSoundSetting} onToggleAnimations={() => setUi(toggleAnimations)} onEnterProjectile={go('hub')} />}
+    {screen === 'map' && <WorldMapPage ui={ui} progress={gameState.progress} onToggleProfile={() => setUi(toggleProfile)} onCloseOverlay={() => setUi(closeUiOverlay)} onOpenPanel={(panel) => setUi((current) => openMapPanel(current, panel))} onToggleSound={toggleSoundSetting} onToggleAnimations={() => setUi(toggleAnimations)} onEnterProjectile={go('hub')} />}
     {screen === 'hub' && <Hub onMission={() => enterMission(false)} onBack={go('map')} session={session} onPump={() => setSession((current) => addPump(current, 25))} onSkill={() => setSession((current) => current.skill === 'sign-step-1' ? activateTrajectoryVision(current) : startSkillSign(current))} />}
-    {screen === 'mission' && <ProjectileMission onExit={go('map')} demoMode={demoMode} />}
+    {screen === 'mission' && <ProjectileMission onExit={go('map')} demoMode={demoMode} onComplete={(stars) => setGameState((current) => { const next = completeProjectileMission(current, stars); saveGameState(next); return next })} />}
   </main>
 }
 

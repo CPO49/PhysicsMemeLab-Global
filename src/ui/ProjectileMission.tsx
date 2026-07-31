@@ -21,6 +21,7 @@ import { EnergyBar, SkillSlot } from './components/GameHud'
 import { IllustratedAsset } from './components/IllustratedAsset'
 import { PaperCard } from './components/PaperCard'
 import './missionDebug.css'
+import './ProjectileMissionPolish.css'
 
 const gameplayDebugAssets = {
   launcher: '/assets/debug/launcher-debug.svg',
@@ -57,7 +58,7 @@ type DebugAdvance = {
   reason: string
 }
 
-export function ProjectileMission({ onExit, demoMode = false }: { onExit: () => void; demoMode?: boolean }) {
+export function ProjectileMission({ onExit, onComplete, demoMode = false }: { onExit: () => void; onComplete?: (stars: number) => void; demoMode?: boolean }) {
   const [mission, setMission] = useState<MissionState>(initialMissionState)
   const [game, setGame] = useState<GameSession>(initialGameSession)
   const [aim, setAim] = useState<Aim>({ angle: 45, speed: 25 })
@@ -126,6 +127,7 @@ export function ProjectileMission({ onExit, demoMode = false }: { onExit: () => 
   }
 
   const debugAdvance = getDebugAdvance(mission, game)
+  const missionStars = calculateMissionStars(mission)
 
   const fillEnergy = () => {
     setGame((current) => ({
@@ -395,6 +397,7 @@ export function ProjectileMission({ onExit, demoMode = false }: { onExit: () => 
           <strong>{th.mission.understandingLabel}:</strong>{' '}
           {mission.concept || th.mission.noAnswer}
         </p>
+        <div className="summary-stars" aria-label={`${missionStars} stars earned`}>{[1, 2, 3].map((star) => <span className={star <= missionStars ? 'is-earned' : ''} key={star}>★</span>)}</div>
         <p>Badge: Projectile Rookie · Skill Preview: Trajectory Vision</p>
         <div className="landing-actions">
           <Button
@@ -410,6 +413,8 @@ export function ProjectileMission({ onExit, demoMode = false }: { onExit: () => 
             href="#map"
             onClick={(event) => {
               event.preventDefault()
+              onComplete?.(missionStars)
+              audioManager.play('success')
               onExit()
             }}
           >
@@ -615,7 +620,7 @@ function AttemptChip({
         {th.mission.attempt} {index + 1}
       </strong>
       {!shot ? (
-        <p>—</p>
+        <p>â€”</p>
       ) : detailed ? (
         <p>
           {th.mission.angle} {shot.angle}° · {th.mission.speed} {shot.speed} ·{' '}
@@ -715,6 +720,12 @@ function DebugAttempt({ label, shot }: { label: string; shot?: Shot }) {
         : 'not recorded'}
     </p>
   )
+}
+
+function calculateMissionStars(mission: MissionState) {
+  const hit = mission.attempts.some((shot) => shot.hit)
+  const explained = mission.concept.trim().length >= 8
+  return 1 + (hit ? 1 : 0) + (explained ? 1 : 0)
 }
 
 function getDebugAdvance(
