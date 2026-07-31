@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { activateTrajectoryVision, addPump, initialGameSession, startSkillSign } from './learning/gameSession'
 import { th } from './content/th'
-import { initialUiState, closeUiOverlay, openMapPanel, selectInputMode, toggleAnimations, toggleProfile, toggleSound, type InputMode } from './state/uiState'
+import { initialUiState, closeUiOverlay, openMapPanel, toggleAnimations, toggleProfile, toggleSound } from './state/uiState'
 import { initialWorldMapProgress } from './state/worldMapState'
 import { assets } from './ui/assets'
 import { assetFallbacks } from './ui/assetFallbacks'
@@ -27,7 +27,7 @@ export function App() {
 
   return <main className="app">
     {(screen === 'hub' || screen === 'mission') && <TopBar onMap={go('map')} />}
-    {screen === 'landing' && <LandingPage inputMode={ui.inputMode} onInputMode={(inputMode: InputMode) => setUi((current) => selectInputMode(current, inputMode))} onStart={go('map')} onQuickDemo={() => enterMission(true)} />}
+    {screen === 'landing' && <LandingPage onStart={go('map')} onQuickDemo={() => enterMission(true)} />}
     {screen === 'map' && <WorldMapPage ui={ui} progress={initialWorldMapProgress} onToggleProfile={() => setUi(toggleProfile)} onCloseOverlay={() => setUi(closeUiOverlay)} onOpenPanel={(panel) => setUi((current) => openMapPanel(current, panel))} onToggleSound={() => setUi(toggleSound)} onToggleAnimations={() => setUi(toggleAnimations)} onEnterProjectile={go('hub')} />}
     {screen === 'hub' && <Hub onMission={() => enterMission(false)} onBack={go('map')} session={session} onPump={() => setSession((current) => addPump(current, 25))} onSkill={() => setSession((current) => current.skill === 'sign-step-1' ? activateTrajectoryVision(current) : startSkillSign(current))} />}
     {screen === 'mission' && <ProjectileMission onExit={go('map')} demoMode={demoMode} />}

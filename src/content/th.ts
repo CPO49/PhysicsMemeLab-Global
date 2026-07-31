@@ -58,7 +58,7 @@ export const th = {
     playerName: 'DEK67', menuMissions: 'ภารกิจ', menuStats: 'สถิติของฉัน', menuCollection: 'คอลเลกชัน', menuSettings: 'ตั้งค่า', progressUnit: 'ดาว',
   },
   g3: {
-    landingHeadline: 'ออกเดินทางในโลกของมีม\\nที่ทุกท่าทางซ่อนฟิสิกส์ไว้!',
+    landingHeadline: 'ออกเดินทางในโลกของมีม ที่ทุกท่าทางซ่อนฟิสิกส์ไว้!', landingHeadlineLines: ['ออกเดินทางในโลกของมีม', 'ที่ทุกท่าทางซ่อนฟิสิกส์ไว้!'],
     landingSupport: 'ใช้มือของคุณ ทดลอง และเข้าใจมันจริง ๆ',
     quickDemo: 'โหมดทดลองด่วน',
     cameraReady: 'พร้อมเชื่อมต่อกล้องในขั้นถัดไป',

@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --paper: #FFF8E8; --paper-alt: #F4EEDB; --sky: #79C9F2; --ocean: #2689C7;
   --navy: #12385B; --navy-deep: #0A2945; --blue: #2477D4; --yellow: #FFC928;
   --yellow-dark: #E6A900; --coral: #F05A4F; --green: #55B85A; --locked: #6D8194;
@@ -8,3 +8,5 @@
   --shadow-soft: 0 6px 18px rgb(18 56 91 / 14%); --shadow-panel: 0 10px 24px rgb(10 41 69 / 18%); --shadow-sticker: 0 5px 0 rgb(10 41 69 / 20%);
   --border-navy: 2px solid var(--navy); --content-max: 1440px;
 }
+
+:root{--font-ui:'Anuphan','Leelawadee UI',Tahoma,sans-serif;--font-weight-regular:400;--font-weight-medium:500;--font-weight-semibold:600;--font-weight-bold:700;--font-weight-extrabold:800;}

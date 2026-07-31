@@ -3,7 +3,7 @@ export const assets = {
     landing: {
       background:
         '/assets/final/landing/landing_background_lab_notebook.png',
-      logo: '/assets/final/landing/landing_logo_meme_physics_lab_67.png',
+      logo: '/assets/final/landing_logo_meme_physics_lab_67_tight.png',
       mascot: '/assets/final/landing/landing_mascot_main.png',
     },
     worldMap: {
