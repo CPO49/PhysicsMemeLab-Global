@@ -11,7 +11,7 @@ export const th = {
   islandFriction: 'เกาะพื้นลื่น',
   islandEnergy: 'เกาะพลังงาน',
   islandMystery: 'เกาะลับ',
-  islandPower67: 'เกาะพลัง 67',
+  islandPower67: 'เกาะแรงโน้มถ่วง',
   locked: 'เกาะนี้ยังล็อกอยู่',
   comingSoon: 'เกาะนี้กำลังเตรียมเปิดให้สำรวจ',
   understood: 'เข้าใจแล้ว',

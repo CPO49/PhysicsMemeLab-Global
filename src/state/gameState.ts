@@ -30,6 +30,15 @@ export function completeElectricMission(state: PersistedGameState, stars: number
   }
 }
 
+export function completeGravityMission(state: PersistedGameState, stars: number): PersistedGameState {
+  const safeStars = Math.max(1, Math.min(3, Math.round(stars)))
+  return {
+    ...state,
+    progress: { ...state.progress, power67: Math.max(state.progress.power67, safeStars * 10) },
+    completedMissions: state.completedMissions.includes('gravity-free-fall-lab') ? state.completedMissions : [...state.completedMissions, 'gravity-free-fall-lab'],
+  }
+}
+
 export function saveGameState(state: PersistedGameState) {
   try { window.localStorage.setItem(GAME_STATE_STORAGE_KEY, JSON.stringify(state)) } catch { /* local storage is optional */ }
 }

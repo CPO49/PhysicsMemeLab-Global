@@ -10,7 +10,8 @@ describe('resolveWorldMapIslands', () => {
     expect(resolveWorldMapIslands(['projectile-basic-shot']).find((island) => island.id === 'momentum')?.status).toBe('active')
   })
 
-  it('removes the Power 67 lock after the electric mission is complete', () => {
-    expect(resolveWorldMapIslands(['momentum-electric-voltage']).find((island) => island.id === 'power67')?.status).toBe('coming-soon')
+  it('activates Gravity Island after the electric mission is complete', () => {
+    const island = resolveWorldMapIslands(['momentum-electric-voltage']).find((entry) => entry.id === 'power67')
+    expect(island).toMatchObject({ status: 'active', name: 'Gravity Island' })
   })
 })

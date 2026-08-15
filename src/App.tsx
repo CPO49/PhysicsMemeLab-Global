@@ -16,9 +16,10 @@ import './ui/landing/Landing.css'
 import './ui/motion.css'
 import { ProjectileMission } from './ui/ProjectileMission'
 import { ElectricMission } from './ui/electric/ElectricMission'
+import { GravityLabSandbox } from './ui/gravity/GravityLabSandbox'
 import { WorldMapPage } from './ui/worldmap/WorldMapPage'
 
-type Screen = 'landing' | 'map' | 'hub' | 'mission' | 'electric'
+type Screen = 'landing' | 'map' | 'hub' | 'mission' | 'electric' | 'gravity'
 
 export function App() {
   const [layoutStudio, setLayoutStudio] = useState(() => window.location.pathname === '/layout-editor')
@@ -55,12 +56,13 @@ export function App() {
   if (layoutStudio) return <LandingLayoutStudio onExit={leaveLayoutStudio} onApply={leaveLayoutStudio} />
 
   return <main className="app">
-    {(screen === 'hub' || screen === 'mission' || screen === 'electric') && <TopBar onMap={go('map')} />}
+    {(screen === 'hub' || screen === 'mission' || screen === 'electric' || screen === 'gravity') && <TopBar onMap={go('map')} />}
     {screen === 'landing' && <LandingPage onStart={go('map')} onQuickDemo={() => enterMission(true)} />}
-    {screen === 'map' && <WorldMapPage ui={ui} progress={gameState.progress} completedMissions={gameState.completedMissions} onToggleProfile={() => setUi(toggleProfile)} onCloseOverlay={() => setUi(closeUiOverlay)} onOpenPanel={(panel) => setUi((current) => openMapPanel(current, panel))} onToggleSound={toggleSoundSetting} onChangeSoundVolume={changeSoundVolume} onToggleAnimations={() => setUi(toggleAnimations)} onEnterProjectile={go('hub')} onEnterElectric={go('electric')} />}
+    {screen === 'map' && <WorldMapPage ui={ui} progress={gameState.progress} completedMissions={gameState.completedMissions} onToggleProfile={() => setUi(toggleProfile)} onCloseOverlay={() => setUi(closeUiOverlay)} onOpenPanel={(panel) => setUi((current) => openMapPanel(current, panel))} onToggleSound={toggleSoundSetting} onChangeSoundVolume={changeSoundVolume} onToggleAnimations={() => setUi(toggleAnimations)} onEnterProjectile={go('hub')} onEnterElectric={go('electric')} onEnterGravity={go('gravity')} />}
     {screen === 'hub' && <Hub onMission={() => enterMission(false)} onBack={go('map')} session={session} onPump={() => setSession((current) => addPump(current, 25))} onSkill={() => setSession((current) => current.skill === 'sign-step-1' ? activateTrajectoryVision(current) : startSkillSign(current))} />}
     {screen === 'mission' && <ProjectileMission onExit={go('map')} demoMode={demoMode} onComplete={(stars) => setGameState((current) => { const next = completeProjectileMission(current, stars); saveGameState(next); return next })} />}
     {screen === 'electric' && <ElectricMission onExit={go('map')} onComplete={(stars) => setGameState((current) => { const next = completeElectricMission(current, stars); saveGameState(next); return next })} />}
+    {screen === 'gravity' && <GravityLabSandbox onExit={go('map')} />}
   </main>
 }
 
