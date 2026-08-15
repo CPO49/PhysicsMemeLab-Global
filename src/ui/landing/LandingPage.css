@@ -45,12 +45,16 @@
   gap: 0;
   max-width: 470px;
   margin: clamp(-10px, -1dvh, -4px) 0 8px;
-  color: #282018;
+  color: #1a1208;
   font-family: var(--font-ui);
   font-size: clamp(30px, 2.4vw, 46px);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.18;
   letter-spacing: 0;
+  text-shadow:
+    0 0 18px rgba(255, 246, 200, 0.9),
+    0 0 6px rgba(255, 246, 200, 0.7),
+    1px 1px 0 rgba(255, 246, 200, 0.4);
 }
 
 .g3-landing__notebook-zone > p {
@@ -60,6 +64,16 @@
   font-size: clamp(.82rem, 1vw, 1.1rem);
   font-weight: 900;
   line-height: 1.4;
+}
+
+.landing-layout-support {
+  display: inline-block;
+  padding: 3px 10px 3px 2px;
+  border-radius: 4px;
+  background: rgba(255, 248, 210, 0.6);
+  font-weight: 700 !important;
+  color: #1a1208 !important;
+  text-shadow: 0 1px 0 rgba(255, 248, 210, 0.5);
 }
 
 .g3-landing__mascot-zone {
@@ -169,8 +183,8 @@
 .g4-info-cards__icon { width: clamp(27px, 2.2vw, 37px); height: clamp(27px, 2.2vw, 37px); }
 .g4-info-cards strong,
 .g4-info-cards small { display: block; line-height: 1.2; }
-.g4-info-cards strong { font-size: clamp(.66rem, .86vw, .91rem); }
-.g4-info-cards small { margin-top: 4px; font-size: clamp(.53rem, .64vw, .67rem); font-weight: 800; }
+.g4-info-cards strong { font-size: clamp(.68rem, .88vw, .94rem); }
+.g4-info-cards small { margin-top: 3px; font-size: clamp(.58rem, .68vw, .72rem); font-weight: 700; color: #4a3c20; }
 
 .g4-info-modal-backdrop {
   position: fixed;

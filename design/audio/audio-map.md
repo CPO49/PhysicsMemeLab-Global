@@ -8,3 +8,5 @@
 | `Sound/เล่นเสร็จ.mp3` | `summary-success.mp3` | Summary success cue |
 
 Short interaction effects use the AudioManager's local Web Audio fallback: hover, click, mission start, locked island, 67 charge, skill unlock, projectile launch, hit, miss and success. Audio starts only after an interaction and missing audio never blocks the game.
+
+World Map > Settings provides a master volume slider from 0% to 100% and a separate sound on/off control. Changes apply to the current music immediately and persist in `memePhysics.audioSettings.v1`.

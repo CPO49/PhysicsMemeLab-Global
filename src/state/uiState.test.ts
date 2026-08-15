@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { closeUiOverlay, initialUiState, openMapPanel, selectInputMode, toggleAnimations, toggleProfile, toggleSound } from './uiState'
+import { closeUiOverlay, initialUiState, openMapPanel, selectInputMode, setSoundVolume, toggleAnimations, toggleProfile, toggleSound } from './uiState'
 
 describe('G.3 UI state', () => {
   it('selects each input mode without changing resources', () => {
@@ -13,6 +13,9 @@ describe('G.3 UI state', () => {
     const menu = openMapPanel(profile, 'settings')
     expect(menu).toMatchObject({ profileOpen: false, activePanel: 'settings' })
     expect(toggleSound(menu).soundEnabled).toBe(false)
+    expect(setSoundVolume(menu, 35).soundVolume).toBe(35)
+    expect(setSoundVolume(menu, 120).soundVolume).toBe(100)
+    expect(setSoundVolume(menu, -20).soundVolume).toBe(0)
     expect(toggleAnimations(menu).animationsEnabled).toBe(false)
     expect(closeUiOverlay(menu)).toMatchObject({ profileOpen: false, activePanel: null })
   })

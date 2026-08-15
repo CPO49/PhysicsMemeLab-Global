@@ -8,6 +8,7 @@ export type UiState = {
   profileOpen: boolean
   activePanel: MapPanel
   soundEnabled: boolean
+  soundVolume: number
   animationsEnabled: boolean
 }
 
@@ -18,6 +19,7 @@ export const initialUiState: UiState = {
   profileOpen: false,
   activePanel: null,
   soundEnabled: true,
+  soundVolume: 75,
   animationsEnabled: true,
 }
 
@@ -26,4 +28,5 @@ export const toggleProfile = (state: UiState): UiState => ({ ...state, profileOp
 export const closeUiOverlay = (state: UiState): UiState => ({ ...state, profileOpen: false, activePanel: null })
 export const openMapPanel = (state: UiState, activePanel: Exclude<MapPanel, null>): UiState => ({ ...state, profileOpen: false, activePanel })
 export const toggleSound = (state: UiState): UiState => ({ ...state, soundEnabled: !state.soundEnabled })
+export const setSoundVolume = (state: UiState, soundVolume: number): UiState => ({ ...state, soundVolume: Math.max(0, Math.min(100, Math.round(soundVolume))) })
 export const toggleAnimations = (state: UiState): UiState => ({ ...state, animationsEnabled: !state.animationsEnabled })

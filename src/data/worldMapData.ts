@@ -25,3 +25,15 @@ export const worldMapIslands: WorldMapIsland[] = [
   { id: 'energy', name: 'Energy Island', localName: th.islandEnergy, asset: assets.final.worldMap.islands.energy, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'ปลดล็อกจากเส้นทางการเรียนรู้', position: { x: 50, y: 72 } },
   { id: 'mystery', name: 'Mystery Island', localName: th.islandMystery, asset: assets.final.worldMap.islands.mystery, debugAsset: assetFallbacks.lockedIsland, status: 'coming-soon', unlockCondition: 'กำลังเตรียมเปิดให้สำรวจ', position: { x: 81, y: 72, scale: .98 } },
 ]
+
+export function resolveWorldMapIslands(completedMissions: readonly string[]): WorldMapIsland[] {
+  const momentumUnlocked = completedMissions.includes('projectile-basic-shot')
+  const power67Unlocked = completedMissions.includes('momentum-electric-voltage')
+  return worldMapIslands.map((island) =>
+    island.id === 'momentum' && momentumUnlocked
+      ? { ...island, status: 'active', isNew: true }
+      : island.id === 'power67' && power67Unlocked
+        ? { ...island, status: 'coming-soon' }
+      : island,
+  )
+}

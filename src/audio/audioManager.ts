@@ -4,12 +4,23 @@ export type AudioSettings = { enabled: boolean; masterVolume: number; musicVolum
 const storageKey = 'memePhysics.audioSettings.v1'
 const defaults: AudioSettings = { enabled: true, masterVolume: .75, musicVolume: .45, sfxVolume: .42 }
 
+const clampVolume = (value: number, fallback: number) => Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : fallback
+
+function normalizeSettings(value: Partial<AudioSettings>): AudioSettings {
+  return {
+    enabled: typeof value.enabled === 'boolean' ? value.enabled : defaults.enabled,
+    masterVolume: clampVolume(value.masterVolume ?? defaults.masterVolume, defaults.masterVolume),
+    musicVolume: clampVolume(value.musicVolume ?? defaults.musicVolume, defaults.musicVolume),
+    sfxVolume: clampVolume(value.sfxVolume ?? defaults.sfxVolume, defaults.sfxVolume),
+  }
+}
+
 function loadSettings(): AudioSettings {
   try {
     const raw = window.localStorage.getItem(storageKey)
     if (!raw) return defaults
     const value = JSON.parse(raw) as Partial<AudioSettings>
-    return { ...defaults, ...value }
+    return normalizeSettings(value)
   } catch { return defaults }
 }
 
@@ -29,9 +40,12 @@ class AudioManager {
   getSettings = () => this.settings
 
   updateSettings = (patch: Partial<AudioSettings>) => {
-    this.settings = { ...this.settings, ...patch }
+    this.settings = normalizeSettings({ ...this.settings, ...patch })
     try { window.localStorage.setItem(storageKey, JSON.stringify(this.settings)) } catch { /* local storage is optional */ }
-    if (this.music) this.music.muted = !this.settings.enabled
+    if (this.music) {
+      this.music.muted = !this.settings.enabled
+      this.music.volume = this.settings.masterVolume * this.settings.musicVolume
+    }
     if (this.settings.enabled && this.unlocked && this.scene) this.playScene(this.scene)
   }
 

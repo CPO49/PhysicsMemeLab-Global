@@ -1,0 +1,58 @@
+.sixtyseven-overlay {
+  position: relative;
+  width: 100%;
+  border: 4px solid #071c31;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 4 / 3;
+}
+
+.sixtyseven-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.sixtyseven-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform: scaleX(-1);
+}
+
+.sixtyseven-status {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.sixtyseven-label {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 3px solid #071c31;
+  border-radius: 999px;
+  background: rgba(36, 119, 212, 0.92);
+  color: #fff8e8;
+  font-weight: 800;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transition: background 0.15s;
+}
+
+.sixtyseven-label.is-pumping {
+  background: rgba(255, 201, 40, 0.95);
+  color: #12385b;
+  animation: pump-pulse 0.15s ease;
+}
+
+@keyframes pump-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}

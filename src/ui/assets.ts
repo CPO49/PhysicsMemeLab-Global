@@ -24,6 +24,10 @@ export const assets = {
           '/assets/final/worldmap/island_06_power_67.png',
       },
     },
+    electric: {
+      pikachu: '/assets/final/electric/pikachu-drunk.png',
+      pokeball: '/assets/final/electric/pokeball.png',
+    },
   },
   branding: {
     logo: '/assets/branding/logo-primary.webp',
