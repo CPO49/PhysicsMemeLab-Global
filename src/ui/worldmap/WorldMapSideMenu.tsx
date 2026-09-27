@@ -10,7 +10,7 @@ const items = [
 ] as const
 
 export function WorldMapSideMenu({ activePanel, onOpen }: { activePanel: MapPanel; onOpen: (panel: Exclude<MapPanel, null>) => void }) {
-  return <nav className="g3-map-menu" aria-label="เมนูแผนที่">{items.map(([id, label, icon]) => <button type="button" key={id} className={activePanel === id ? 'is-active' : ''} onClick={() => onOpen(id)} aria-label={label}>
+  return <nav className="g3-map-menu" aria-label="Map menu">{items.map(([id, label, icon]) => <button type="button" key={id} className={activePanel === id ? 'is-active' : ''} onClick={() => onOpen(id)} aria-label={label}>
     <img className="g3-map-menu__frame" src={activePanel === id ? gameUiAssets.menu.active : gameUiAssets.menu.default} alt="" /><img className="g3-map-menu__icon" src={icon} alt="" /><span>{label}</span>
   </button>)}</nav>
 }

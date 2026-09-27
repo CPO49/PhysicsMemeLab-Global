@@ -22,11 +22,11 @@ const WORLD_HEIGHT = defaultGravityEnvironment.height
 const MAX_OBJECTS = 3
 
 const objectAssets: Record<GravityObjectKind, string> = {
-  ball: '/assets/generated/gravity/tralalero-tralala.png',
+  ball: '/assets/generated/gravity/ball.svg',
   paper: '/assets/generated/gravity/paper.svg',
   feather: '/assets/generated/gravity/feather.svg',
 }
-const objectNames: Record<GravityObjectKind, string> = { ball: 'Tralalero Tralala', paper: 'Paper', feather: 'Feather' }
+const objectNames: Record<GravityObjectKind, string> = { ball: 'Ball', paper: 'Paper', feather: 'Feather' }
 
 type HandState = {
   heldId: string | null
@@ -254,7 +254,7 @@ export function GravityLabSandbox({ onExit }: { onExit: () => void }) {
     <section className="gravity-sandbox">
       <header className="gravity-sandbox__header">
         <div>
-          <button className="gravity-sandbox__back" type="button" onClick={onExit}>← กลับ</button>
+          <button className="gravity-sandbox__back" type="button" onClick={onExit}>← Back</button>
           <h1>Lab Sandbox</h1>
         </div>
         <div className="gravity-sandbox__status">

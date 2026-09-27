@@ -179,7 +179,7 @@ export function GameScene({
               <animate attributeName="opacity" values="0.5;0;0.5" dur="0.5s" repeatCount="2" />
             </circle>
             <text x="680" y="260" textAnchor="middle" fontSize="36" fontWeight="bold" fill="#FFD700" stroke="#8B4500" strokeWidth="2">
-              🎯 โดน!
+              🎯 Hit!
             </text>
           </g>
         )}
@@ -207,9 +207,9 @@ export function GameScene({
 
         {/* Angle/speed HUD overlay */}
         <rect x="630" y="12" width="160" height="52" rx="8" fill="rgba(7,28,49,0.85)" />
-        <text x="642" y="32" fontSize="13" fill="#aac" fontFamily="monospace">มุม</text>
+        <text x="642" y="32" fontSize="13" fill="#aac" fontFamily="monospace">Angle</text>
         <text x="700" y="32" fontSize="16" fontWeight="bold" fill="#fff" fontFamily="monospace">{angle}°</text>
-        <text x="642" y="54" fontSize="13" fill="#aac" fontFamily="monospace">แรง</text>
+        <text x="642" y="54" fontSize="13" fill="#aac" fontFamily="monospace">Power</text>
         <text x="700" y="54" fontSize="16" fontWeight="bold" fill="#fff" fontFamily="monospace">{speed}</text>
       </svg>
     </div>

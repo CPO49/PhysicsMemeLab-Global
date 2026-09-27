@@ -65,7 +65,7 @@ export function ElectricMission({ onExit, onComplete }: { onExit: () => void; on
     event.preventDefault()
     const voltage = parseVoltage(answer)
     if (voltage === null) {
-      setInputError('พิมพ์เป็นตัวเลข เช่น 8 หรือ 8V')
+      setInputError('Enter a number, such as 8 or 8V')
       return
     }
     if (voltage !== question.answer) {
@@ -94,54 +94,54 @@ export function ElectricMission({ onExit, onComplete }: { onExit: () => void; on
   return (
     <section className={`electric-mission electric-mission--${phase}`} aria-labelledby="electric-title">
       <header className="electric-mission__header">
-        <span>เกาะไฟฟ้า</span>
-        <strong>ด่าน 2 / กฎของโอห์ม</strong>
+        <span>Electric Island</span>
+        <strong>Mission 2 / Ohm’s law</strong>
       </header>
 
       {phase === 'lesson' && (
         <article className="electric-mission__lesson">
           <div className="electric-mission__lesson-heading">
-            <p className="electric-mission__lesson-label">บทเรียนก่อนเริ่มภารกิจ</p>
-            <h1 id="electric-title">รู้จักกฎของโอห์ม</h1>
-            <p>กฎของโอห์มใช้อธิบายความสัมพันธ์ระหว่างแรงดันไฟฟ้า กระแสไฟฟ้า และความต้านทาน</p>
+            <p className="electric-mission__lesson-label">Before you begin</p>
+            <h1 id="electric-title">Meet Ohm’s law</h1>
+            <p>Ohm’s law describes the relationship between voltage, current, and resistance.</p>
           </div>
 
           <div className="electric-mission__lesson-grid">
             <section className="electric-mission__variable-panel" aria-labelledby="electric-variables-title">
-              <h2 id="electric-variables-title">ตัวแปรที่ต้องรู้</h2>
+              <h2 id="electric-variables-title">Key variables</h2>
               <dl className="electric-mission__variable-list">
                 <div>
-                  <dt><span>V</span> แรงดันไฟฟ้า</dt>
-                  <dd>แรงที่ผลักให้กระแสไฟฟ้าไหล หน่วยเป็นโวลต์ (V)</dd>
+                  <dt><span>V</span> Voltage</dt>
+                  <dd>Electric potential difference that drives current, measured in volts (V).</dd>
                 </div>
                 <div>
-                  <dt><span>I</span> กระแสไฟฟ้า</dt>
-                  <dd>ปริมาณกระแสที่ไหลในวงจร หน่วยเป็นแอมแปร์ (A)</dd>
+                  <dt><span>I</span> Current</dt>
+                  <dd>The rate of electric charge flow, measured in amperes (A).</dd>
                 </div>
                 <div>
-                  <dt><span>R</span> ความต้านทาน</dt>
-                  <dd>สิ่งที่ขัดขวางการไหลของกระแส หน่วยเป็นโอห์ม (Ω)</dd>
+                  <dt><span>R</span> Resistance</dt>
+                  <dd>Opposition to current flow, measured in ohms (Ω).</dd>
                 </div>
               </dl>
             </section>
 
             <section className="electric-mission__example-panel" aria-labelledby="electric-example-title">
-              <p className="electric-mission__formula-card" aria-label="วี เท่ากับ ไอ คูณ อาร์">
+              <p className="electric-mission__formula-card" aria-label="V equals I times R">
                 <span>V</span><b>=</b><span>I</span><b>x</b><span>R</span>
               </p>
-              <h2 id="electric-example-title">ตัวอย่างวิธีคำนวณ</h2>
-              <p className="electric-mission__example-question">ถ้า R = 4 Ω และ I = 2 A ต้องใช้แรงดันไฟฟ้าเท่าไหร่?</p>
+              <h2 id="electric-example-title">Worked example</h2>
+              <p className="electric-mission__example-question">If R = 4 Ω and I = 2 A, what voltage is needed?</p>
               <ol className="electric-mission__calculation-steps">
-                <li>เลือกสูตร <strong>V = I x R</strong></li>
-                <li>แทนค่า <strong>V = 2 x 4</strong></li>
-                <li>คำนวณได้ <strong>V = 8V</strong></li>
+                <li>Choose the formula <strong>V = I x R</strong></li>
+                <li>Substitute values <strong>V = 2 x 4</strong></li>
+                <li>Calculate <strong>V = 8V</strong></li>
               </ol>
-              <p className="electric-mission__lesson-tip">จำง่าย ๆ: ถ้าโจทย์ให้ I และ R ให้นำสองค่านี้มาคูณกัน</p>
+              <p className="electric-mission__lesson-tip">Tip: when I and R are given, multiply them to find V.</p>
             </section>
           </div>
 
           <button className="electric-mission__lesson-start" type="button" onClick={finishLesson}>
-            เข้าใจแล้ว เริ่มด่าน 2
+            Got it — start mission 2
           </button>
         </article>
       )}
@@ -150,65 +150,65 @@ export function ElectricMission({ onExit, onComplete }: { onExit: () => void; on
         <div className="electric-mission__intro">
           <div className="electric-mission__intro-copy">
             <p className="electric-mission__eyebrow">V = I x R</p>
-            <h1 id="electric-title">จับปิกาจูด้วยพลังไฟฟ้า</h1>
-            <p>ตอบค่าแรงดันไฟฟ้าให้ถูก 3 ข้อ ข้อละ 20 วินาที</p>
+            <h1 id="electric-title">Catch the electric mascot</h1>
+            <p>Answer 3 voltage questions correctly. You have 20 seconds per question.</p>
           </div>
           <div className="electric-mission__hero" aria-hidden="true">
             <span className="electric-mission__hero-glow" />
-            <img className="electric-mission__pikachu" src={assets.final.electric.pikachu} alt="" />
+            <img className="electric-mission__mascot" src={assets.final.electric.mascot} alt="" />
           </div>
           <button className="electric-mission__capture" type="button" onClick={beginQuiz}>
             <span className="electric-mission__ball-crop" aria-hidden="true">
-              <img src={assets.final.electric.pokeball} alt="" />
+              <img src={assets.final.electric.energyOrb} alt="" />
             </span>
-            <span>โยน = จับปิกาจู</span>
+            <span>Throw to catch the mascot</span>
           </button>
         </div>
       )}
 
       {phase === 'throwing' && (
         <div className="electric-mission__throwing" role="status">
-          <img className="electric-mission__throw-target" src={assets.final.electric.pikachu} alt="ปิกาจู" />
+          <img className="electric-mission__throw-target" src={assets.final.electric.mascot} alt="Electric mascot" />
           <span className="electric-mission__thrown-ball electric-mission__ball-crop" aria-hidden="true">
-            <img src={assets.final.electric.pokeball} alt="" />
+            <img src={assets.final.electric.energyOrb} alt="" />
           </span>
-          <p>คำนวณแรงดันให้ทัน ก่อนปิกาจูจะช็อต!</p>
+          <p>Calculate the voltage before the mascot zaps!</p>
         </div>
       )}
 
       {phase === 'quiz' && (
         <div className="electric-mission__quiz">
           <div className="electric-mission__quiz-character" aria-hidden="true">
-            <img src={assets.final.electric.pikachu} alt="" />
+            <img src={assets.final.electric.mascot} alt="" />
           </div>
           <div className="electric-mission__problem">
-            <div className={`electric-mission__timer${remaining <= 5 ? ' is-urgent' : ''}`} role="timer" aria-live="polite" aria-label={`เหลือ ${remaining} วินาที`}>
-              <span>เวลา</span><strong>{remaining}</strong><small>วินาที</small>
+            <div className={`electric-mission__timer${remaining <= 5 ? ' is-urgent' : ''}`} role="timer" aria-live="polite" aria-label={`Remaining: ${remaining} seconds`}>
+              <span>Time</span><strong>{remaining}</strong><small>seconds</small>
             </div>
-            <p className="electric-mission__progress">ข้อ {questionIndex + 1} / {electricQuestions.length}</p>
+            <p className="electric-mission__progress">Question {questionIndex + 1} / {electricQuestions.length}</p>
             <p className="electric-mission__formula">V = I x R</p>
-            <h1 id="electric-title">ต้องใช้แรงดันไฟฟ้าเท่าไหร่?</h1>
+            <h1 id="electric-title">What voltage is needed?</h1>
             <dl className="electric-mission__values">
-              <div><dt>ความต้านทาน (R)</dt><dd>{question.resistance} Ω</dd></div>
-              <div><dt>กระแสไฟฟ้า (I)</dt><dd>{question.current} A</dd></div>
+              <div><dt>Resistance (R)</dt><dd>{question.resistance} Ω</dd></div>
+              <div><dt>Current (I)</dt><dd>{question.current} A</dd></div>
             </dl>
             <form onSubmit={submit} noValidate>
-              <label htmlFor="voltage-answer">พิมพ์คำตอบแรงดันไฟฟ้า (V)</label>
+              <label htmlFor="voltage-answer">Enter the voltage (V)</label>
               <div className="electric-mission__answer-row">
                 <input
                   ref={inputRef}
                   id="voltage-answer"
                   inputMode="decimal"
                   autoComplete="off"
-                  placeholder="เช่น 8V"
+                  placeholder="e.g. 8V"
                   value={answer}
                   onChange={(event) => { setAnswer(event.target.value); setInputError('') }}
                   aria-invalid={Boolean(inputError)}
                   aria-describedby={inputError ? 'voltage-error' : 'voltage-hint'}
                 />
-                <button type="submit">ยืนยันคำตอบ</button>
+                <button type="submit">Submit answer</button>
               </div>
-              <p id="voltage-hint" className="electric-mission__hint">ไม่มีตัวเลือก ต้องคำนวณและพิมพ์คำตอบเอง</p>
+              <p id="voltage-hint" className="electric-mission__hint">Calculate and type your answer. There are no multiple-choice options.</p>
               {inputError && <p id="voltage-error" className="electric-mission__input-error" role="alert">{inputError}</p>}
             </form>
           </div>
@@ -218,22 +218,22 @@ export function ElectricMission({ onExit, onComplete }: { onExit: () => void; on
       {(phase === 'failed' || phase === 'timeout') && (
         <div className="electric-mission__result electric-mission__result--fail" role="alert">
           <ElectricBurst />
-          <img src={assets.final.electric.pikachu} alt="ปิกาจูปล่อยไฟฟ้า" />
-          <p className="electric-mission__result-kicker">{phase === 'timeout' ? 'หมดเวลา 20 วินาที!' : 'ตอบผิด!'}</p>
-          <h1 id="electric-title">โดนปิกาจูช็อตเข้าให้</h1>
-          <p className="electric-mission__solution">คำตอบคือ {formatElectricCalculation(question)}</p>
-          <button type="button" onClick={beginQuiz}>เริ่มใหม่ตั้งแต่ข้อ 1</button>
+          <img src={assets.final.electric.mascot} alt="Electric mascot releasing sparks" />
+          <p className="electric-mission__result-kicker">{phase === 'timeout' ? '20 seconds — time is up!' : 'Incorrect answer!'}</p>
+          <h1 id="electric-title">The mascot gave you a zap!</h1>
+          <p className="electric-mission__solution">Answer: {formatElectricCalculation(question)}</p>
+          <button type="button" onClick={beginQuiz}>Restart from question 1</button>
         </div>
       )}
 
       {phase === 'complete' && (
         <div className="electric-mission__result electric-mission__result--win" role="status">
           <ElectricBurst />
-          <img src={assets.final.electric.pikachu} alt="ปิกาจูปล่อยไฟฟ้าหลังถูกจับ" />
-          <p className="electric-mission__result-kicker">ตอบถูกครบ 3 ข้อ จับได้แล้ว!</p>
-          <h1 id="electric-title">แต่ปิกาจูยังช็อตใส่อยู่ดี</h1>
-          <p className="electric-mission__solution">ผ่านด่านกฎของโอห์ม V = I x R</p>
-          <button type="button" onClick={leaveCompletedMission}>รับ 3 ดาวและกลับแผนที่</button>
+          <img src={assets.final.electric.mascot} alt="Electric mascot sparking after capture" />
+          <p className="electric-mission__result-kicker">All 3 correct — caught it!</p>
+          <h1 id="electric-title">Still sparking with energy!</h1>
+          <p className="electric-mission__solution">Ohm’s law mission complete: V = I × R</p>
+          <button type="button" onClick={leaveCompletedMission}>Claim 3 stars and return to map</button>
         </div>
       )}
     </section>

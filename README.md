@@ -1,87 +1,66 @@
-# Physics Meme Lab test
+# Physics Meme Lab
 
-เว็บทดลองฟิสิกส์ที่ควบคุมด้วยมือ สำหรับ 67HACK Track 3
+A student physics-learning project that uses meme-inspired play and hands-on experiments to make abstract ideas easier to explore.
 
-ใช้กล้องจับท่ามือหรือเล่นด้วยเมาส์ก็ได้ ทดลองแรงโน้มถ่วง แรงยิง และประจุไฟฟ้า แบบลงมือทำจริง ไม่ใช่แค่กดปุ่ม
+Originally developed as a student hackathon prototype for 67HACK, this project has been adapted for the **Acodemic × G.I.R.L.S. Global SDG Hackathon** international/SDG submission. The adaptation includes English interface copy, refreshed character presentation, and documentation; it retains the existing physics and gameplay.
 
-## ทำอะไรได้บ้าง
+## UN SDG 4: Quality Education
 
-**Projectile Mission**  
-ยิงวัตถุด้วยท่ามือ กำมือแน่นเป็นยิงแรง กำนิดเดียวเป็นยิงอ่อน ปรับมุมยิงได้ตามที่เอียงมือ
+The project aims to support engaging physics practice through prediction, experimentation, comparison, and explanation. Browser-based activities and alternative controls in the projectile mission can lower some participation barriers. This is an educational prototype: improved learning outcomes, accessibility across all devices, and classroom impact have not been validated. No UN affiliation or endorsement is claimed.
 
-**Gravity Hand Lab**  
-หนีบนิ้วจับของ แยกนิ้วปล่อยของ ปรับมวลได้ตอนจับอยู่ เห็นว่าของหนักตกเร็วหรือช้ากว่าของเบา
+## Live demo
 
-**Electric Mission**  
-ทดลองประจุไฟฟ้า ดูว่าวัตถุดึงดูดหรือผลักกันยังไง
+The updated submission build has **passed local lint, 29 unit tests, production build, and a brief landing → world map → projectile mission smoke check**. Deployment is pending. A verified public demo URL has not yet been supplied. Add the approved public URL here before submitting; localhost is only for local testing.
 
-**World Map**  
-แผนที่เกาะฟิสิกส์ เล่นผ่านแต่ละด่านปลดล็อกเกาะถัดไป ความคืบหน้าเซฟไว้ใน localStorage
+Local preview: [http://localhost:5173](http://localhost:5173) after starting the development server below.
 
-## เปิดเว็บยังไง
+## Features
 
-ต้องมี Node.js 22 ขึ้นไป
+- **Projectile mission:** predict a launch angle, practice controls, launch twice, activate a trajectory preview, compare attempts, answer a concept question, and view a learning summary.
+- **Electric mission:** read an Ohm’s law lesson and calculate voltage using V = I × R in three timed questions, with retry and completion feedback.
+- **Gravity sandbox:** spawn objects and obstacles, change gravity, inspect mass/force/speed, and use camera hand gestures to grab and throw objects. This is the gravity screen currently connected to the world map; the separate guided gravity lesson component is not connected to the main navigation.
+- **World map:** mission progression and unlocks, with local progress storage. Some islands and statistics/collection panels are placeholders.
+- **Settings:** sound, volume, and animation controls.
 
-```bash
-npm install
-npm run dev
-```
+## Controls
 
-เปิดเบราว์เซอร์ตาม URL ที่ขึ้น (มักจะ `localhost:5173`)
+**Projectile:** make a fist to grab, move to aim, and open your hand to launch. Mouse dragging and an on-screen launch button are available. Use the displayed Space/Pump 67 and Enter/Skill Sign controls for the energy and trajectory stages.
 
-ถ้ากล้องไม่ทำงาน หรือไม่มีกล้อง ใช้เมาส์แทนได้
+**Gravity sandbox:** enable the camera, pinch thumb and index finger to grab, move your hand, then release the pinch to drop or throw. Extend/curl your other fingers while holding to change mass. Sidebar controls add objects and adjust gravity. Direct mouse/touch dragging is not implemented in this connected sandbox.
 
-## ควบคุมยังไง
+**Electric:** type the voltage answer and submit it. Each question has a 20-second timer.
 
-### Projectile (ยิงวัตถุ)
-- กำมือ → จับเริ่มยิง
-- ขยับมือ → กำหนดมุมและแรง
-- กางมือ → ปล่อย
+## Tech stack
 
-### Gravity (จับวัตถุ)
-- หนีบนิ้วโป้ง-นิ้วชี้ → จับ
-- ขยับมือ → ลากของไปวาง
-- แยกนิ้ว → ปล่อย
-- กางนิ้วอื่นตอนจับอยู่ → เพิ่มมวล
-- งอนิ้วอื่น → ลดมวล
-
-### เมาส์/ทัชสกรีน
-ถ้ากล้องไม่เปิด เว็บจะให้คลิกหรือแตะหน้าจอแทนอัตโนมัติ
+React, TypeScript, Vite, browser-rendered SVG/DOM simulation, MediaPipe Tasks Vision for hand tracking, localStorage for local preferences/progress, and Vitest for unit tests. No application backend or account system is included.
 
 ## Privacy
 
-กล้องทำงานในเครื่อง ไม่ส่งภาพออก ไม่บันทึก ไม่เก็บข้อมูลใบหน้าหรือลายมือ  
-ความคืบหน้าเกมเซฟด้วย localStorage ไม่ผ่าน server
+Camera access requires browser permission. The application processes camera frames locally for hand tracking; it does not record, save, or upload camera footage, faces, or biometric templates. Progress, audio settings, and optional landing-layout preferences are stored in this browser’s localStorage. Session reflections are held in application memory.
 
-## Commands
+Hand tracking downloads runtime/model files from jsDelivr and Google-hosted MediaPipe resources, so initial camera setup needs internet access. Those requests expose ordinary connection metadata to the hosting providers; local camera processing does not mean the application makes no network requests. Clear this site’s browser data to remove stored preferences and progress.
+
+## How to run
+
+Use Node.js 22.12+ (or a newer supported version) and npm.
 
 ```bash
-npm run lint         # ตรวจโค้ด
-npm test -- --run    # รันเทส
-npm run build        # build production
+npm ci
+npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-## Stack
+Open the URL printed by Vite. If port 5173 is occupied, Vite may choose another port. Camera access works on localhost or HTTPS and depends on browser/device support.
 
-React + TypeScript + Vite  
-MediaPipe Hand Tracking (client-side)  
-Vitest for tests
-
-## โครงสร้างโค้ด
-
-```
-src/
-├── ui/          หน้าจอและ UI components
-├── physics/     ฟังก์ชันคำนวณฟิสิกส์
-├── gestures/    แปลง hand landmarks เป็นคำสั่ง
-├── camera/      จัดการกล้องและ MediaPipe
-├── state/       game state และ progress
-└── content/     ข้อความในเกม
-
-public/assets/   รูปภาพและ assets
+```bash
+npm run lint
+npm test -- --run
+npm run build
 ```
 
-## ทำโดย
+The production build is written to `dist/`. Deployment is a separate, approval-dependent step.
 
-67HACK Team  
-Track 3: Applied Meme Engineering
+## Assets and submission disclosure
+
+The three replacement images supplied by the student are used under neutral filenames in `public/assets/submission/`. Unused superseded images, the import archive, and an obsolete source backup have been removed after checking runtime references. This presentation update is not an independent verification of ownership or licensing of every image or sound. Review asset provenance before the final submission.
+
+Keep the project name **Physics Meme Lab** and its core concept: playful, meme-inspired physics learning. This prototype is not a validated curriculum or a finished platform. Camera gesture reliability, smaller screens, and the complete judging flow still require device testing.

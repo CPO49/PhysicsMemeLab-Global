@@ -1,1 +1,0 @@
-วาง Final Asset ตามชื่อและขนาดใน design/ASSET_REQUIREMENTS.md

@@ -191,6 +191,10 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
   }, [])
 
   const advanceSkillSign = useCallback(() => {
+    // Match the camera gesture path when the second fallback step completes.
+    if (game.skill === 'sign-step-1') {
+      setMission((current) => current.step === 'sign' ? { ...current, step: 'shot2' } : current)
+    }
     audioManager.play(game.skill === 'sign-step-1' ? 'skillUnlocked' : 'click')
     setGame((current) =>
       current.skill === 'sign-step-1'
@@ -367,7 +371,7 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
                 landmarks={camera.landmarks}
               />
             )}
-            {camera.status === 'loading' && <p className="camera-loading">กำลังเปิดกล้อง...</p>}
+            {camera.status === 'loading' && <p className="camera-loading">Opening camera...</p>}
           </div>
           {/* Right: Game scene */}
           <div className="gameplay-split__scene">
@@ -384,14 +388,14 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
             />
           </div>
         </div>
-        <p className="gameplay-hint">กำมือเพื่อจับ → ขยับเพื่อเล็ง → เปิดมือเพื่อยิง</p>
+        <p className="gameplay-hint">Make a fist to grab → Move to aim → Open your hand to launch</p>
         <p className="gameplay-hint">{th.mission.dragGuide}</p>
         <div className="shot-hud">
           <span><small>{th.mission.angle}</small><strong>{activeAim.angle}°</strong></span>
           <span><small>{th.mission.speed}</small><strong>{activeAim.speed}</strong></span>
           {lastShot && (
             <span className={lastShot.hit ? 'is-hit' : 'is-miss'}>
-              <small>ผล</small><strong>{lastShot.hit ? '🎯 โดน!' : '❌ พลาด'}</strong>
+              <small>Result</small><strong>{lastShot.hit ? '🎯 Hit!' : '❌ Miss'}</strong>
             </span>
           )}
         </div>
@@ -400,7 +404,7 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
           <AttemptChip index={1} shot={mission.attempts[1]} />
         </div>
         <Button href="#fire" aria-disabled={animating} onClick={(event) => { event.preventDefault(); fire() }}>
-          ยิงด้วยปุ่ม (สำรอง)
+          Launch with button
         </Button>
       </>
     )
@@ -418,18 +422,18 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
               hands={pump67.hands}
               pumpRate={pump67.pumpRate}
             />
-            {pump67.status === 'loading' && <p className="camera-loading">กำลังเปิดกล้อง...</p>}
+            {pump67.status === 'loading' && <p className="camera-loading">Opening camera...</p>}
           </div>
           {/* Right: energy bar + instructions */}
           <div className="charge-split__bar">
             <EnergyBar value={game.energy} large pulsing={pulse} />
             <p className="charge-instruction">
-              <strong>แบมือหงาย 2 ข้าง</strong><br />
-              สลับขึ้น–ลงเร็ว ๆ เพื่อปั้มพลัง 67!
+              <strong>Hold both palms facing up</strong><br />
+              Alternate your hands up and down to charge 67 energy!
             </p>
             <p className="charge-rate">
-              ความเร็ว: {Math.round(pump67.pumpRate * 100)}%
-              {pump67.pumpRate > 0.7 ? ' ⚡ สุดยอด!' : pump67.pumpRate > 0.4 ? ' 🔥 ดีมาก!' : ''}
+              Speed: {Math.round(pump67.pumpRate * 100)}%
+              {pump67.pumpRate > 0.7 ? ' ⚡ Awesome!' : pump67.pumpRate > 0.4 ? ' 🔥 Great!' : ''}
             </p>
             <button className="pump-fallback-btn" onClick={pumpEnergy}>{th.pumpButton}</button>
             {game.energy === 100 && (
@@ -449,8 +453,8 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
       game.skill === 'active' ? 2 : game.skill === 'sign-step-1' ? 1 : 0
 
     const signInstruction = signProgress < 1
-      ? '🤲 ประกบมือทั้ง 2 ข้างเข้าหากัน'
-      : '🙌 กางมือออกให้กว้าง!'
+      ? '🤲 Bring both hands together'
+      : '🙌 Spread your hands apart!'
 
     body = (
       <>
@@ -464,7 +468,7 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
               hands={skillSign.hands}
               pumpRate={0}
             />
-            {skillSign.status === 'loading' && <p className="camera-loading">กำลังเปิดกล้อง...</p>}
+            {skillSign.status === 'loading' && <p className="camera-loading">Opening camera...</p>}
           </div>
           <div className="sign-split__info">
             <SkillSlot skill={game.skill} />
@@ -477,10 +481,10 @@ export function ProjectileMission({ onExit, onComplete, demoMode = false }: { on
             </div>
             <p className="sign-instruction">{signInstruction}</p>
             {signProgress === 0 && (
-              <p className="sign-hint">ยกมือขึ้นระดับอก แล้วนำมือมาชนกัน</p>
+              <p className="sign-hint">Raise your hands to chest height and bring them together</p>
             )}
             {signProgress === 1 && (
-              <p className="sign-hint">ดีมาก! ตอนนี้กางมือออกให้กว้าง ⚡</p>
+              <p className="sign-hint">Great! Now spread your hands apart ⚡</p>
             )}
             <button className="pump-fallback-btn" onClick={advanceSkillSign}>
               {th.mission.nextSignStep}
@@ -651,7 +655,7 @@ function AttemptChip({
         {th.mission.attempt} {index + 1}
       </strong>
       {!shot ? (
-        <p>â€”</p>
+        <p>—</p>
       ) : detailed ? (
         <p>
           {th.mission.angle} {shot.angle}° · {th.mission.speed} {shot.speed} ·{' '}

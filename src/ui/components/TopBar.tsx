@@ -7,7 +7,7 @@ type TopBarProps = {
 
 export function TopBar({
   onMap,
-  title = 'Meme Physics Archipelago',
+  title = 'Physics Meme Lab',
 }: TopBarProps) {
   return (
     <header className="app-topbar">

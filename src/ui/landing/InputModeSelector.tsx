@@ -11,7 +11,7 @@ const options = [
 ]
 
 export function InputModeSelector({ value, onChange }: InputModeSelectorProps) {
-  return <div className="g3-input-selector" role="group" aria-label="เลือกวิธีควบคุม">
+  return <div className="g3-input-selector" role="group" aria-label="Choose controls">
     {options.map((option) => <button key={option.value} type="button" className={value === option.value ? 'is-selected' : ''} onClick={() => onChange(option.value)} aria-pressed={value === option.value}>
       <img className="g3-input-selector__frame" src={gameUiAssets.landing.card} alt="" aria-hidden="true" />
       <img className="g3-input-selector__icon" src={option.icon} alt="" aria-hidden="true" />

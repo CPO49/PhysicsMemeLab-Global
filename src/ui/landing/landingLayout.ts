@@ -1,6 +1,6 @@
 import { th } from '../../content/th'
 
-export const LANDING_LAYOUT_STORAGE_KEY = 'memePhysics.landingLayout.v1'
+export const LANDING_LAYOUT_STORAGE_KEY = 'memePhysics.landingLayout.en.v1'
 
 export type LandingElementId = 'logo' | 'mascot' | 'headline' | 'support' | 'actions' | 'infoCards'
 

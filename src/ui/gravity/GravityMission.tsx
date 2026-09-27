@@ -25,7 +25,7 @@ const objectAssets: Record<GravityObjectKind, string> = {
   paper: '/assets/generated/gravity/paper.svg',
   feather: '/assets/generated/gravity/feather.svg',
 }
-const objectNames: Record<GravityObjectKind, string> = { ball: 'ลูกบอล', paper: 'กระดาษ', feather: 'ขนนก' }
+const objectNames: Record<GravityObjectKind, string> = { ball: 'Ball', paper: 'Paper', feather: 'Feather' }
 
 type DragState = { id: string; pointerId: number; x: number; y: number; time: number } | null
 type HandState = { heldId: string | null; x: number; y: number; time: number; vx: number; vy: number }
@@ -225,16 +225,16 @@ export function GravityMission({ onExit, onComplete }: { onExit: () => void; onC
   return (
     <section className="gravity-mission" aria-labelledby="gravity-title">
       <header className="gravity-mission__topbar">
-        <div><span>เกาะที่ 3</span><h1 id="gravity-title">Gravity Hand Lab</h1></div>
-        <div className="gravity-mission__goal-count" aria-label={`ทำภารกิจแล้ว ${completedGoals} จาก 4`}>{completedGoals}/4 ภารกิจ</div>
+        <div><span>Island 3</span><h1 id="gravity-title">Gravity Hand Lab</h1></div>
+        <div className="gravity-mission__goal-count" aria-label={`Completed ${completedGoals} of 4`}>{completedGoals}/4 tasks</div>
       </header>
 
       <div className="gravity-mission__workspace">
         <main className="gravity-mission__stage-wrap">
           <div className="gravity-mission__stage-toolbar">
-            <div className="gravity-mission__mode" aria-label="โหมดสภาพแวดล้อม">
-              <button type="button" className={mode === 'vacuum' ? 'is-active' : ''} onClick={() => setMode('vacuum')}>สุญญากาศ</button>
-              <button type="button" className={mode === 'air' ? 'is-active' : ''} onClick={() => setMode('air')}>มีแรงต้านอากาศ</button>
+            <div className="gravity-mission__mode" aria-label="Environment mode">
+              <button type="button" className={mode === 'vacuum' ? 'is-active' : ''} onClick={() => setMode('vacuum')}>Vacuum</button>
+              <button type="button" className={mode === 'air' ? 'is-active' : ''} onClick={() => setMode('air')}>Air resistance</button>
             </div>
             <span className="gravity-mission__equation">{mode === 'vacuum' ? 'a = g' : 'Fdrag = ½ρCdAv²'}</span>
           </div>
@@ -255,7 +255,7 @@ export function GravityMission({ onExit, onComplete }: { onExit: () => void; onC
                 className={`gravity-object gravity-object--${body.kind}${body.id === selectedId ? ' is-selected' : ''}${body.held ? ' is-held' : ''}`}
                 style={{ left: `${(body.x / WORLD_WIDTH) * 100}%`, top: `${(body.y / WORLD_HEIGHT) * 100}%`, '--gravity-object-size': `${Math.max(7, body.radius * 22)}%` } as React.CSSProperties}
                 onPointerDown={(event) => beginPointerGrab(event, body.id)}
-                aria-label={`${objectNames[body.kind]} มวล ${body.mass.toFixed(2)} กิโลกรัม`}
+                aria-label={`${objectNames[body.kind]} Mass ${body.mass.toFixed(2)} kg`}
               >
                 <img src={objectAssets[body.kind]} alt="" />
                 <span>{body.mass.toFixed(2)} kg</span>
@@ -264,59 +264,59 @@ export function GravityMission({ onExit, onComplete }: { onExit: () => void; onC
             {handCursor && cameraLandmarks && (
               <div className={`gravity-hand-cursor${handCursor.pinching ? ' is-pinching' : ''}`} style={{ left: `${(handCursor.x / WORLD_WIDTH) * 100}%`, top: `${(handCursor.y / WORLD_HEIGHT) * 100}%` }} aria-hidden="true">
                 <span />
-                <b>{handCursor.pinching ? handCursor.massGesture === 'increase' ? '+ มวล' : handCursor.massGesture === 'decrease' ? '− มวล' : 'จับอยู่' : 'หนีบเพื่อจับ'}</b>
+                <b>{handCursor.pinching ? handCursor.massGesture === 'increase' ? '+ Mass' : handCursor.massGesture === 'decrease' ? '− Mass' : 'Holding' : 'Pinch to grab'}</b>
               </div>
             )}
-            <div className="gravity-mission__ground"><span>พื้นทดลอง</span></div>
+            <div className="gravity-mission__ground"><span>Lab floor</span></div>
           </div>
 
           <div className="gravity-mission__actions">
-            <button type="button" onClick={dropAll}>ปล่อยพร้อมกัน</button>
-            <button type="button" onClick={resetLab}>รีเซ็ตฉาก</button>
-            <button type="button" disabled={completedGoals < 4} onClick={finishMission}>สรุปผลการทดลอง</button>
+            <button type="button" onClick={dropAll}>Drop all</button>
+            <button type="button" onClick={resetLab}>Reset lab</button>
+            <button type="button" disabled={completedGoals < 4} onClick={finishMission}>View experiment summary</button>
           </div>
         </main>
 
         <aside className="gravity-mission__controls">
           <section className="gravity-control gravity-control--gravity">
-            <div className="gravity-control__heading"><h2>ค่าแรงโน้มถ่วง</h2><output>{gravity.toFixed(2)} m/s²</output></div>
-            <input type="range" min="1.6" max="24.8" step="0.1" value={gravity} onInput={(event) => setGravityValue(event.currentTarget.valueAsNumber)} aria-label={`ค่าแรงโน้มถ่วง ${gravity.toFixed(2)} เมตรต่อวินาทีกำลังสอง`} />
+            <div className="gravity-control__heading"><h2>Gravity</h2><output>{gravity.toFixed(2)} m/s²</output></div>
+            <input type="range" min="1.6" max="24.8" step="0.1" value={gravity} onInput={(event) => setGravityValue(event.currentTarget.valueAsNumber)} aria-label={`Gravity ${gravity.toFixed(2)} meters per second squared`} />
             <div className="gravity-control__presets">
-              <button type="button" onClick={() => setGravityValue(1.62)}>ดวงจันทร์</button>
-              <button type="button" onClick={() => setGravityValue(9.81)}>โลก</button>
-              <button type="button" onClick={() => setGravityValue(24.79)}>ดาวพฤหัส</button>
+              <button type="button" onClick={() => setGravityValue(1.62)}>Moon</button>
+              <button type="button" onClick={() => setGravityValue(9.81)}>Earth</button>
+              <button type="button" onClick={() => setGravityValue(24.79)}>Jupiter</button>
             </div>
           </section>
 
           <section className="gravity-control">
-            <h2>เพิ่มวัตถุ</h2>
+            <h2>Add object</h2>
             <div className="gravity-control__objects">
               {(Object.keys(objectAssets) as GravityObjectKind[]).map((kind) => <button type="button" key={kind} disabled={bodies.length >= 6} onClick={() => addObject(kind)}><img src={objectAssets[kind]} alt="" /><span>{objectNames[kind]}</span></button>)}
             </div>
           </section>
 
           <section className="gravity-control gravity-control--selected">
-            <div><h2>วัตถุที่เลือก</h2><strong>{selectedBody ? objectNames[selectedBody.kind] : '-'}</strong></div>
-            {selectedBody && <><p>มวล <b>{selectedBody.mass.toFixed(2)} kg</b></p><div className="gravity-control__mass-buttons"><button type="button" onClick={() => changeMass(-0.1)} aria-label="ลดมวล">−</button><button type="button" onClick={() => changeMass(0.1)} aria-label="เพิ่มมวล">+</button></div><small>กล้อง: หนีบนิ้วเพื่อจับ กางนิ้วเพิ่มมวล งอนิ้วลดมวล</small></>}
+            <div><h2>Selected object</h2><strong>{selectedBody ? objectNames[selectedBody.kind] : '-'}</strong></div>
+            {selectedBody && <><p>Mass <b>{selectedBody.mass.toFixed(2)} kg</b></p><div className="gravity-control__mass-buttons"><button type="button" onClick={() => changeMass(-0.1)} aria-label="Decrease mass">−</button><button type="button" onClick={() => changeMass(0.1)} aria-label="Increase mass">+</button></div><small>Camera: pinch to grab, extend fingers to increase mass, curl fingers to decrease it</small></>}
           </section>
 
           <section className="gravity-control gravity-control--camera">
-            <div className="gravity-control__heading"><h2>เซนเซอร์มือ</h2><span className={`gravity-camera-status gravity-camera-status--${cameraStatus}`}>{cameraStatus === 'ready' ? 'พร้อม' : cameraStatus === 'loading' ? 'กำลังเปิด' : 'ปิดอยู่'}</span></div>
+            <div className="gravity-control__heading"><h2>Hand tracking</h2><span className={`gravity-camera-status gravity-camera-status--${cameraStatus}`}>{cameraStatus === 'ready' ? 'Ready' : cameraStatus === 'loading' ? 'Opening' : 'Off'}</span></div>
             <div className="gravity-camera-view">
               <video ref={videoRef} muted playsInline />
               {cameraLandmarks?.map((point, index) => <i key={index} style={{ left: `${(1 - point.x) * 100}%`, top: `${point.y * 100}%` }} />)}
-              {cameraStatus !== 'ready' && <p>ภาพกล้องประมวลผลในเครื่องเท่านั้น</p>}
+              {cameraStatus !== 'ready' && <p>Camera frames are processed on your device only</p>}
             </div>
-            {cameraError && <p className="gravity-camera-error">เปิดกล้องไม่สำเร็จ ใช้เมาส์หรือนิ้วลากแทนได้</p>}
-            <button type="button" disabled={cameraStatus === 'loading'} onClick={toggleCameraControl}>{cameraStatus === 'ready' ? 'ปิดกล้อง' : cameraStatus === 'loading' ? 'กำลังเปิดกล้อง...' : 'เปิดกล้องและเซนเซอร์มือ'}</button>
+            {cameraError && <p className="gravity-camera-error">Could not open the camera. Use mouse or touch to drag instead.</p>}
+            <button type="button" disabled={cameraStatus === 'loading'} onClick={toggleCameraControl}>{cameraStatus === 'ready' ? 'Turn camera off' : cameraStatus === 'loading' ? 'Opening camera...' : 'Enable camera and hand tracking'}</button>
           </section>
 
           <section className="gravity-control gravity-control--tasks">
-            <h2>ภารกิจทดลอง</h2>
-            <Task done={progress.vacuum}>ปล่อยวัตถุในสุญญากาศ</Task>
-            <Task done={progress.air}>ทดลองในโหมดอากาศ</Task>
-            <Task done={progress.gravity}>เปลี่ยนค่า g จากโลก</Task>
-            <Task done={progress.mass}>เพิ่มหรือลดมวลวัตถุ</Task>
+            <h2>Lab tasks</h2>
+            <Task done={progress.vacuum}>Drop objects in a vacuum</Task>
+            <Task done={progress.air}>Experiment with air resistance</Task>
+            <Task done={progress.gravity}>Change g from the Earth setting</Task>
+            <Task done={progress.mass}>Increase or decrease an object’s mass</Task>
           </section>
         </aside>
       </div>
@@ -330,20 +330,20 @@ function Task({ done, children }: { done: boolean; children: React.ReactNode }) 
 
 function GravityLesson({ onStart, onExit }: { onStart: () => void; onExit: () => void }) {
   return <section className="gravity-lesson" aria-labelledby="gravity-lesson-title">
-    <button className="gravity-lesson__back" type="button" onClick={onExit}>กลับแผนที่</button>
+    <button className="gravity-lesson__back" type="button" onClick={onExit}>Back to map</button>
     <div className="gravity-lesson__content">
-      <p className="gravity-lesson__label">เกาะที่ 3 / บทเรียนก่อนทดลอง</p>
-      <h1 id="gravity-lesson-title">มวลกับแรงโน้มถ่วง ทำให้ตกต่างกันจริงไหม?</h1>
+      <p className="gravity-lesson__label">Island 3 / Before the lab</p>
+      <h1 id="gravity-lesson-title">Do mass and gravity change how objects fall?</h1>
       <div className="gravity-lesson__modes">
-        <article><span>01</span><h2>สุญญากาศ</h2><p>วัตถุทุกมวลตกด้วยความเร่งเท่ากับค่า <b>g</b> มวลไม่ทำให้ตกเร็วขึ้น</p><strong>a = g</strong></article>
-        <article><span>02</span><h2>มีอากาศ</h2><p>แรงต้านขึ้นกับรูปร่าง พื้นที่หน้าตัด ความเร็ว และมวล วัตถุจึงตกต่างกันได้</p><strong>Fdrag = ½ρCdAv²</strong></article>
+        <article><span>01</span><h2>Vacuum</h2><p>In a vacuum, objects of every mass accelerate at <b>g</b> Mass does not make objects fall faster.</p><strong>a = g</strong></article>
+        <article><span>02</span><h2>With air</h2><p>Drag depends on shape, cross-sectional area, and speed. Its effect on acceleration also depends on mass, so objects can fall differently.</p><strong>Fdrag = ½ρCdAv²</strong></article>
       </div>
-      <div className="gravity-lesson__gestures"><h2>ควบคุมด้วยมือ</h2><ol><li><b>หนีบนิ้วโป้งกับนิ้วชี้</b><span>จับและลากวัตถุ</span></li><li><b>กางนิ้วที่เหลือระหว่างจับ</b><span>เพิ่มมวลวัตถุ</span></li><li><b>งอนิ้วเข้าระหว่างจับ</b><span>ลดมวลวัตถุ</span></li><li><b>สะบัดแล้วปล่อยการหนีบ</b><span>ปาวัตถุออกไป</span></li></ol></div>
-      <button className="gravity-lesson__start" type="button" onClick={onStart}>เข้าใจแล้ว เข้าห้องทดลอง</button>
+      <div className="gravity-lesson__gestures"><h2>Hand controls</h2><ol><li><b>Pinch your thumb and index finger</b><span>Grab and drag an object</span></li><li><b>Extend your other fingers while holding</b><span>Increase object mass</span></li><li><b>Curl your fingers while holding</b><span>Decrease object mass</span></li><li><b>Move quickly, then release your pinch</b><span>Throw the object</span></li></ol></div>
+      <button className="gravity-lesson__start" type="button" onClick={onStart}>Got it — enter the lab</button>
     </div>
   </section>
 }
 
 function GravitySummary({ progress, onReplay, onComplete }: { progress: ExperimentProgress; onReplay: () => void; onComplete: () => void }) {
-  return <section className="gravity-summary" aria-labelledby="gravity-summary-title"><div className="gravity-summary__report"><p>รายงานการทดลองเกาะที่ 3</p><h1 id="gravity-summary-title">สิ่งที่ค้นพบจาก Gravity Lab</h1><div className="gravity-summary__findings"><article><b>สุญญากาศ</b><p>มวลมากหรือน้อยไม่เปลี่ยนความเร่งจากแรงโน้มถ่วง วัตถุตกพร้อมกันเมื่อปล่อยจากความสูงเดียวกัน</p></article><article><b>แรงต้านอากาศ</b><p>รูปร่าง พื้นที่หน้าตัด และมวลส่งผลต่อแรงต้าน วัตถุจึงตกไม่เหมือนกัน</p></article><article><b>ค่า g</b><p>ค่า g สูงทำให้ความเร็วแนวดิ่งเพิ่มเร็วขึ้น ค่า g ต่ำทำให้วัตถุลอยและตกช้าลง</p></article></div><p className="gravity-summary__score">ทำภารกิจครบ {Object.values(progress).filter(Boolean).length}/4 รับ 3 ดาว</p><div className="gravity-summary__actions"><button type="button" onClick={onReplay}>ทดลองอีกครั้ง</button><button type="button" onClick={onComplete}>รับดาวและกลับแผนที่</button></div></div></section>
+  return <section className="gravity-summary" aria-labelledby="gravity-summary-title"><div className="gravity-summary__report"><p>Island 3 lab report</p><h1 id="gravity-summary-title">What you discovered in the Gravity Lab</h1><div className="gravity-summary__findings"><article><b>Vacuum</b><p>In a vacuum, mass does not change gravitational acceleration. Objects dropped from the same height at rest land together.</p></article><article><b>Air resistance</b><p>Shape and cross-sectional area affect drag. Mass affects how much drag slows an object, so objects can fall differently.</p></article><article><b>Gravity (g)</b><p>Higher g increases downward speed faster. Lower g makes objects fall more slowly.</p></article></div><p className="gravity-summary__score">Tasks completed: {Object.values(progress).filter(Boolean).length}/4 — earn 3 stars</p><div className="gravity-summary__actions"><button type="button" onClick={onReplay}>Try again</button><button type="button" onClick={onComplete}>Claim stars and return to map</button></div></div></section>
 }

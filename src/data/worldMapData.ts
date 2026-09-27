@@ -19,11 +19,11 @@ export type WorldMapIsland = {
 
 export const worldMapIslands: WorldMapIsland[] = [
   { id: 'projectile', name: 'Projectile Island', localName: th.islandProjectile, asset: assets.final.worldMap.islands.projectile, debugAsset: assetFallbacks.projectileIsland, status: 'active', isNew: true, unlockCondition: '', position: { x: 18, y: 29, scale: 1.04 } },
-  { id: 'momentum', name: 'Momentum Island', localName: th.islandMomentum, asset: assets.final.worldMap.islands.momentum, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'ผ่านภารกิจเกาะวิถีโค้ง', position: { x: 50, y: 29 } },
-  { id: 'power67', name: 'Gravity Island', localName: th.islandPower67, asset: assets.final.worldMap.islands.power67, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'ผ่านภารกิจไฟฟ้ากฎของโอห์ม', position: { x: 81, y: 29 } },
-  { id: 'friction', name: 'Friction Island', localName: th.islandFriction, asset: assets.final.worldMap.islands.friction, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'ปลดล็อกจากเส้นทางการเรียนรู้', position: { x: 18, y: 72, scale: .98 } },
-  { id: 'energy', name: 'Energy Island', localName: th.islandEnergy, asset: assets.final.worldMap.islands.energy, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'ปลดล็อกจากเส้นทางการเรียนรู้', position: { x: 50, y: 72 } },
-  { id: 'mystery', name: 'Mystery Island', localName: th.islandMystery, asset: assets.final.worldMap.islands.mystery, debugAsset: assetFallbacks.lockedIsland, status: 'coming-soon', unlockCondition: 'กำลังเตรียมเปิดให้สำรวจ', position: { x: 81, y: 72, scale: .98 } },
+  { id: 'momentum', name: 'Ohm’s Law', localName: 'Electric Island', asset: assets.final.worldMap.islands.momentum, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'Complete the projectile mission', position: { x: 50, y: 29 } },
+  { id: 'power67', name: 'Gravity Island', localName: th.islandPower67, asset: assets.final.worldMap.islands.power67, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'Complete the Ohm’s law mission', position: { x: 81, y: 29 } },
+  { id: 'friction', name: 'Friction Island', localName: th.islandFriction, asset: assets.final.worldMap.islands.friction, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'Unlock through the learning path', position: { x: 18, y: 72, scale: .98 } },
+  { id: 'energy', name: 'Energy Island', localName: th.islandEnergy, asset: assets.final.worldMap.islands.energy, debugAsset: assetFallbacks.lockedIsland, status: 'locked', unlockCondition: 'Unlock through the learning path', position: { x: 50, y: 72 } },
+  { id: 'mystery', name: 'Mystery Island', localName: th.islandMystery, asset: assets.final.worldMap.islands.mystery, debugAsset: assetFallbacks.lockedIsland, status: 'coming-soon', unlockCondition: 'Coming soon', position: { x: 81, y: 72, scale: .98 } },
 ]
 
 export function resolveWorldMapIslands(completedMissions: readonly string[]): WorldMapIsland[] {

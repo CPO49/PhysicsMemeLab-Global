@@ -11,7 +11,7 @@ export function IslandNode({ island, progress, onEnter, onLocked }: { island: Wo
   return <button className={`g3-island g3-island--${island.status}`} style={style} type="button" onPointerEnter={() => audioManager.play('hover')} onClick={action} aria-label={`${island.localName}, ${island.name}`}>
     <span className="g3-island__art"><IllustratedAsset src={island.asset} debugSrc={island.debugAsset} alt="" />
       {island.isNew && <span className="g3-island__new"><img src={gameUiAssets.map.newBadge} alt="" /><b>NEW</b></span>}
-      {island.status === 'locked' && <img className="g3-island__lock" src={gameUiAssets.map.lock} alt="ล็อก" />}
+      {island.status === 'locked' && <img className="g3-island__lock" src={gameUiAssets.map.lock} alt="Locked" />}
       {island.status === 'coming-soon' && <span className="g3-island__soon"><img src={gameUiAssets.map.soonBadge} alt="" /><b>Coming Soon</b></span>}
     </span><IslandLabel localName={island.localName} name={island.name} progress={progress} />
   </button>

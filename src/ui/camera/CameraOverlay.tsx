@@ -122,11 +122,11 @@ export function CameraOverlay({ videoRef, canvasRef, gesturePhase, landmarks }: 
   }, [canvasRef]) // Only canvas ref — never restarts mid-game
 
   const gestureLabel: Record<GesturePhase, string> = {
-    idle: 'รอมือ...',
-    hover: 'กำมือเพื่อจับ',
-    grabbed: '✊ จับแล้ว!',
-    aiming: '🎯 เล็ง...',
-    released: '🚀 ยิง!',
+    idle: 'Waiting for a hand...',
+    hover: 'Make a fist to grab',
+    grabbed: '✊ Grabbed!',
+    aiming: '🎯 Aiming...',
+    released: '🚀 Launch!',
   }
 
   return (
@@ -150,9 +150,9 @@ interface CameraErrorProps {
 export function CameraError({ message, onDismiss }: CameraErrorProps) {
   return (
     <div className="camera-error">
-      <strong>ไม่สามารถเปิดกล้องได้</strong>
+      <strong>Could not open the camera</strong>
       <p>{message}</p>
-      <button onClick={onDismiss}>ลองใหม่</button>
+      <button onClick={onDismiss}>Try again</button>
     </div>
   )
 }

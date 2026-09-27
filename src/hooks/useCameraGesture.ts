@@ -63,7 +63,7 @@ export function useCameraGesture(onFire: (aim: AimInput) => void): CameraGesture
   const start = useCallback(async () => {
     if (!isCameraSupported()) {
       setStatus('unsupported')
-      setError('อุปกรณ์นี้ไม่รองรับกล้อง')
+      setError('This device does not support a camera')
       return
     }
 
@@ -139,10 +139,10 @@ export function useCameraGesture(onFire: (aim: AimInput) => void): CameraGesture
       if (runId !== runIdRef.current) return
       const msg = err instanceof Error ? err.message : 'unknown'
       const readable: Record<string, string> = {
-        'permission-denied': 'กรุณาอนุญาตการใช้กล้อง',
-        'not-found': 'ไม่พบกล้องในอุปกรณ์นี้',
-        'not-readable': 'กล้องถูกใช้งานโดยโปรแกรมอื่นอยู่',
-        'unknown': 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
+        'permission-denied': 'Please allow camera access',
+        'not-found': 'No camera found on this device',
+        'not-readable': 'The camera is in use by another application',
+        'unknown': 'Something went wrong. Please try again.',
       }
       setError(readable[msg] ?? readable['unknown'])
       setStatus('error')

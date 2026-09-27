@@ -95,8 +95,8 @@ export function SixtySevenOverlay({ videoRef, canvasRef, hands, pumpRate }: Sixt
 
   const handsCount = hands.length
   const label = handsCount < 2
-    ? handsCount === 0 ? 'ยกมือทั้ง 2 ข้าง...' : 'ยกมืออีกข้าง...'
-    : pumpRate > 0.5 ? '⚡ สุดยอด! รัวต่อ!' : '✊ สลับมือขึ้น–ลง!'
+    ? handsCount === 0 ? 'Raise both hands...' : 'Raise your other hand...'
+    : pumpRate > 0.5 ? '⚡ Awesome! Keep going!' : '✊ Alternate hands up and down!'
 
   return (
     <div className="sixtyseven-overlay">

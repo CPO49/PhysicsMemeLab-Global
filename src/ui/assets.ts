@@ -4,7 +4,7 @@ export const assets = {
       background:
         '/assets/final/landing/landing_background_lab_notebook.png',
       logo: '/assets/final/landing_logo_meme_physics_lab_67_tight.png',
-      mascot: '/assets/final/landing/landing_mascot_main.png',
+      mascot: '/assets/submission/landing-mascot.png',
     },
     worldMap: {
       background:
@@ -25,8 +25,8 @@ export const assets = {
       },
     },
     electric: {
-      pikachu: '/assets/final/electric/pikachu-drunk.png',
-      pokeball: '/assets/final/electric/pokeball.png',
+      mascot: '/assets/submission/electric-mascot.png',
+      energyOrb: '/assets/submission/energy-orb.png',
     },
   },
   branding: {
@@ -36,7 +36,7 @@ export const assets = {
   },
   mascot: {
     hero: '/assets/branding/mascot-hero.webp',
-    guide: '/assets/mascot/mascot-idle.webp',
+    guide: '/assets/submission/electric-mascot.png',
     idle: '/assets/mascot/mascot-idle.webp',
     charge67: '/assets/mascot/mascot-charge67.webp',
     skillSign: '/assets/mascot/mascot-skill-sign.webp',

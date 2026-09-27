@@ -11,11 +11,11 @@ export function WorldMapHud({ ui, onToggleProfile, onCloseProfile }: { ui: UiSta
     document.addEventListener('pointerdown', closeOnOutside); document.addEventListener('keydown', closeOnEscape)
     return () => { document.removeEventListener('pointerdown', closeOnOutside); document.removeEventListener('keydown', closeOnEscape) }
   }, [onCloseProfile])
-  return <header className="g3-map-hud" aria-label="สถานะผู้เล่น">
+  return <header className="g3-map-hud" aria-label="Player status">
     <div className="g3-map-hud__resource"><img src={gameUiAssets.hud.energy} alt="" /><span aria-hidden="true" /><b>{ui.energy}</b></div>
     <div className="g3-map-hud__resource"><img src={gameUiAssets.hud.diamond} alt="" /><span aria-hidden="true" /><b>{ui.diamonds}</b></div>
-    <div className="g3-map-hud__profile" ref={profileRef}><button type="button" onClick={onToggleProfile} aria-expanded={ui.profileOpen} aria-label="เปิดข้อมูลผู้เล่น"><img className="g3-map-hud__profile-frame" src={gameUiAssets.hud.profile} alt="" /><img className="g3-map-hud__avatar" src={gameUiAssets.hud.avatar} alt="" /><b>{th.landingMap.playerName}</b><span aria-hidden="true" /></button>
-      {ui.profileOpen && <div className="g3-map-hud__dropdown" role="dialog" aria-label="ข้อมูลผู้เล่น"><strong>{th.g3.profileGreeting}</strong><small>{ui.energy} Energy · {ui.diamonds} Diamond</small></div>}
+    <div className="g3-map-hud__profile" ref={profileRef}><button type="button" onClick={onToggleProfile} aria-expanded={ui.profileOpen} aria-label="Open player profile"><img className="g3-map-hud__profile-frame" src={gameUiAssets.hud.profile} alt="" /><img className="g3-map-hud__avatar" src={gameUiAssets.hud.avatar} alt="" /><b>{th.landingMap.playerName}</b><span aria-hidden="true" /></button>
+      {ui.profileOpen && <div className="g3-map-hud__dropdown" role="dialog" aria-label="Player profile"><strong>{th.g3.profileGreeting}</strong><small>{ui.energy} Energy · {ui.diamonds} Diamond</small></div>}
     </div>
   </header>
 }

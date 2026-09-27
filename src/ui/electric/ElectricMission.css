@@ -144,7 +144,7 @@
   box-shadow: 0 0 0 16px rgba(255, 216, 61, .38);
 }
 
-.electric-mission__pikachu {
+.electric-mission__mascot {
   position: relative;
   z-index: 1;
   width: min(88%, 430px);
@@ -290,7 +290,7 @@
   .electric-mission__example-panel { padding: 18px; }
   .electric-mission__lesson-start { justify-self: stretch; min-width: 0; }
   .electric-mission__hero { min-height: 290px; }
-  .electric-mission__pikachu { width: min(92%, 370px); }
+  .electric-mission__mascot { width: min(92%, 370px); }
   .electric-mission__intro::before,
   .electric-mission__intro::after { width: 110px; }
   .electric-mission__quiz { grid-template-columns: 1fr; }
