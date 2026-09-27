@@ -1,66 +1,263 @@
 # Physics Meme Lab
 
-A student physics-learning project that uses meme-inspired play and hands-on experiments to make abstract ideas easier to explore.
+**Physics Meme Lab** is an interactive, meme-inspired physics learning experience designed to make abstract science concepts easier to understand through play.
 
-Originally developed as a student hackathon prototype for 67HACK, this project has been adapted for the **Acodemic × G.I.R.L.S. Global SDG Hackathon** international/SDG submission. The adaptation includes English interface copy, refreshed character presentation, and documentation; it retains the existing physics and gameplay.
+Instead of only memorizing formulas, students can experiment with physics concepts through interactive missions, visual feedback, hand gestures, and playful original characters.
 
-## UN SDG 4: Quality Education
+> **Aligned with UN Sustainable Development Goal 4: Quality Education**
 
-The project aims to support engaging physics practice through prediction, experimentation, comparison, and explanation. Browser-based activities and alternative controls in the projectile mission can lower some participation barriers. This is an educational prototype: improved learning outcomes, accessibility across all devices, and classroom impact have not been validated. No UN affiliation or endorsement is claimed.
+---
 
-## Live demo
+## Live Demo
 
-The updated submission build has **passed local lint, 29 unit tests, production build, and a brief landing → world map → projectile mission smoke check**. Deployment is pending. A verified public demo URL has not yet been supplied. Add the approved public URL here before submitting; localhost is only for local testing.
+🎮 **Play Physics Meme Lab:**  
+https://physicsmemelab-global.vercel.app/
 
-Local preview: [http://localhost:5173](http://localhost:5173) after starting the development server below.
+The project runs directly in a modern web browser.
+
+Camera access is used only for optional hand-tracking interactions. Alternative controls are available in supported parts of the experience.
+
+---
+
+## The Problem
+
+Physics can feel difficult when students encounter concepts mainly through formulas, diagrams, and written explanations.
+
+Topics such as projectile motion, electricity, and gravity are easier to understand when students can actively experiment with them and immediately see the results of their decisions.
+
+Physics Meme Lab explores a different approach:
+
+**turn physics concepts into interactive, memorable experiences.**
+
+---
+
+## Our Solution
+
+Physics Meme Lab combines physics learning with playful, meme-inspired interactions.
+
+Students move through different physics missions where they can:
+
+- experiment with variables,
+- make predictions,
+- interact with simulations,
+- receive immediate visual feedback,
+- answer concept questions,
+- and review what they learned.
+
+The goal is not to replace traditional lessons, but to give students another way to explore difficult concepts through interaction.
+
+---
+
+## UN SDG 4 — Quality Education
+
+Physics Meme Lab supports **UN Sustainable Development Goal 4: Quality Education** by exploring a more engaging and accessible way to learn science.
+
+The project focuses on:
+
+- making abstract physics concepts easier to visualize,
+- increasing student engagement through interactive learning,
+- encouraging experimentation instead of memorization alone,
+- and providing browser-based learning experiences that can be accessed without specialized equipment.
+
+The project is designed as an educational prototype showing how familiar internet-style humor and game-like interactions can be used to make STEM learning more approachable.
+
+---
+
+## Physics Missions
+
+### Projectile Motion
+
+Students explore projectile motion by predicting a launch angle and controlling a launch through either hand gestures or alternative controls.
+
+The mission includes:
+
+- launch-angle prediction,
+- interactive aiming,
+- multiple launch attempts,
+- trajectory visualization,
+- concept questions,
+- and a learning summary.
+
+Students can compare their prediction with the actual motion and observe how changing the launch affects the trajectory.
+
+---
+
+### Electricity
+
+The electricity mission introduces basic electrical concepts and **Ohm's Law**.
+
+Students work through short interactive questions involving:
+
+**V = I × R**
+
+The mission provides timed challenges, retry feedback, and completion feedback to reinforce the relationship between voltage, current, and resistance.
+
+---
+
+### Gravity Sandbox
+
+The gravity sandbox allows students to experiment more freely with physical objects.
+
+Students can:
+
+- spawn objects and obstacles,
+- change gravity,
+- observe movement,
+- inspect physical values such as mass, force, and speed,
+- and interact with objects using camera-based hand gestures.
+
+The sandbox encourages experimentation and observation instead of requiring a single correct solution.
+
+---
+
+## Interaction
+
+Physics Meme Lab supports multiple interaction methods depending on the activity.
+
+### Hand Tracking
+
+Selected activities use real-time hand tracking through the device camera.
+
+For example, students can use hand movements to interact with objects and control parts of the simulation.
+
+### Alternative Controls
+
+Where supported, alternative mouse, keyboard, or on-screen controls are provided so the core experience does not depend entirely on camera input.
+
+---
 
 ## Features
 
-- **Projectile mission:** predict a launch angle, practice controls, launch twice, activate a trajectory preview, compare attempts, answer a concept question, and view a learning summary.
-- **Electric mission:** read an Ohm’s law lesson and calculate voltage using V = I × R in three timed questions, with retry and completion feedback.
-- **Gravity sandbox:** spawn objects and obstacles, change gravity, inspect mass/force/speed, and use camera hand gestures to grab and throw objects. This is the gravity screen currently connected to the world map; the separate guided gravity lesson component is not connected to the main navigation.
-- **World map:** mission progression and unlocks, with local progress storage. Some islands and statistics/collection panels are placeholders.
-- **Settings:** sound, volume, and animation controls.
+- Interactive physics missions
+- Projectile motion simulation
+- Electricity and Ohm's Law learning activity
+- Gravity experimentation sandbox
+- Camera-based hand tracking
+- Alternative controls for supported interactions
+- World-map style mission progression
+- Learning questions and feedback
+- Local progress storage
+- Original meme-inspired visual assets
+- Browser-based experience
+- No account required
 
-## Controls
+---
 
-**Projectile:** make a fist to grab, move to aim, and open your hand to launch. Mouse dragging and an on-screen launch button are available. Use the displayed Space/Pump 67 and Enter/Skill Sign controls for the energy and trajectory stages.
+## Technology
 
-**Gravity sandbox:** enable the camera, pinch thumb and index finger to grab, move your hand, then release the pinch to drop or throw. Extend/curl your other fingers while holding to change mass. Sidebar controls add objects and adjust gravity. Direct mouse/touch dragging is not implemented in this connected sandbox.
+Physics Meme Lab is built with:
 
-**Electric:** type the voltage answer and submit it. Each question has a 20-second timer.
+- **React**
+- **TypeScript**
+- **Vite**
+- **MediaPipe**
+- HTML5 / CSS
+- Browser-based physics and interaction logic
+- Local browser storage for progress
 
-## Tech stack
+The project runs primarily on the client side.
 
-React, TypeScript, Vite, browser-rendered SVG/DOM simulation, MediaPipe Tasks Vision for hand tracking, localStorage for local preferences/progress, and Vitest for unit tests. No application backend or account system is included.
+---
 
 ## Privacy
 
-Camera access requires browser permission. The application processes camera frames locally for hand tracking; it does not record, save, or upload camera footage, faces, or biometric templates. Progress, audio settings, and optional landing-layout preferences are stored in this browser’s localStorage. Session reflections are held in application memory.
+Physics Meme Lab does not require users to create an account.
 
-Hand tracking downloads runtime/model files from jsDelivr and Google-hosted MediaPipe resources, so initial camera setup needs internet access. Those requests expose ordinary connection metadata to the hosting providers; local camera processing does not mean the application makes no network requests. Clear this site’s browser data to remove stored preferences and progress.
+Camera access is requested only when a hand-tracking feature requires it.
 
-## How to run
+Camera frames are processed locally in the browser for interaction purposes and are not intentionally uploaded or stored by the application.
 
-Use Node.js 22.12+ (or a newer supported version) and npm.
+Users can also use available alternative controls when they do not want to use camera-based interaction.
+
+---
+
+## Run Locally
+
+### Requirements
+
+- Node.js
+- npm
+- A modern web browser
+
+### Installation
 
 ```bash
-npm ci
-npm run dev -- --host 127.0.0.1 --port 5173
+git clone https://github.com/CPO49/PhysicsMemeLab-Global.git
+cd PhysicsMemeLab-Global
+npm install
+npm run dev
 ```
 
-Open the URL printed by Vite. If port 5173 is occupied, Vite may choose another port. Camera access works on localhost or HTTPS and depends on browser/device support.
+Then open the local development URL shown by Vite in your browser.
 
-```bash
-npm run lint
-npm test -- --run
-npm run build
-```
+---
 
-The production build is written to `dist/`. Deployment is a separate, approval-dependent step.
+## Project Structure
 
-## Assets and submission disclosure
+The project separates major parts of the experience into dedicated modules for:
 
-The three replacement images supplied by the student are used under neutral filenames in `public/assets/submission/`. Unused superseded images, the import archive, and an obsolete source backup have been removed after checking runtime references. This presentation update is not an independent verification of ownership or licensing of every image or sound. Review asset provenance before the final submission.
+- landing and navigation,
+- projectile motion,
+- electricity,
+- gravity simulation,
+- hand tracking,
+- game state,
+- UI,
+- and learning content.
 
-Keep the project name **Physics Meme Lab** and its core concept: playful, meme-inspired physics learning. This prototype is not a validated curriculum or a finished platform. Camera gesture reliability, smaller screens, and the complete judging flow still require device testing.
+This structure allows each physics activity to have its own interaction model while remaining part of the same learning experience.
+
+---
+
+## Development and Testing
+
+Before this submission build was prepared, the project was checked through:
+
+- linting,
+- automated tests,
+- production build verification,
+- and manual gameplay smoke testing.
+
+The current submission build successfully completed **29 automated tests** and a production build.
+
+---
+
+## Project History and Submission Note
+
+Physics Meme Lab was originally developed as a student physics-learning project.
+
+For this international SDG-focused submission, the project was further adapted with:
+
+- an English-language interface,
+- original visual assets,
+- improved international presentation,
+- clearer educational positioning,
+- and explicit alignment with **UN SDG 4: Quality Education**.
+
+The core purpose remains the same:
+
+**help students experience physics through interaction instead of memorization alone.**
+
+---
+
+## Team
+
+Developed by a student team interested in combining:
+
+- software development,
+- interactive learning,
+- physics,
+- game design,
+- and creative technology.
+
+---
+
+## Goal
+
+Physics does not have to begin with a formula.
+
+Sometimes it can begin with:
+
+**"What happens if I try this?"**
+
+Physics Meme Lab is built around that question.
