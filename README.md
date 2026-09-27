@@ -10,14 +10,13 @@ Instead of only memorizing formulas, students can experiment with physics concep
 
 ## Live Demo
 
-🎮 **Play Physics Meme Lab:**  
+**Play Physics Meme Lab:**  
 https://physicsmemelab-global.vercel.app/
 
+**Source Code:**  
+https://github.com/CPO49/PhysicsMemeLab-Global
+
 The project runs directly in a modern web browser.
-
-**Source:** [PhysicsMemeLab-Global](https://github.com/CPO49/PhysicsMemeLab-Global)
-
-Prepared for the **Acodemic × G.I.R.L.S. Global SDG Hackathon**.
 
 Camera access is used only for optional hand-tracking interactions. Alternative controls are available in supported parts of the experience.
 
@@ -54,15 +53,51 @@ The goal is not to replace traditional lessons, but to give students another way
 
 ## What Makes It Different
 
-Physics itself is part of the interaction. In the projectile mission, students predict a launch angle, experiment, observe the trajectory, compare attempts, and answer a concept question.
+Physics itself becomes part of the interaction.
+
+In the projectile mission, students first predict a launch angle, then experiment, observe the trajectory, compare attempts, and answer a concept question.
 
 The learning loop is:
 
 **Predict → Experiment → Observe → Compare → Understand**
 
-Meme-inspired characters and playful scenarios serve as memorable learning cues. Selected activities use browser-based hand tracking to make physical gestures part of the experiment, from aiming a projectile to grabbing and throwing objects in the gravity sandbox.
+Meme-inspired characters and playful scenarios are used as memorable learning cues rather than simple decoration.
 
-Electricity offers a short Ohm’s law challenge, while gravity supports open-ended exploration; each activity uses its own interaction model.
+Selected activities also use browser-based hand tracking, allowing physical gestures to become part of the experiment — from aiming a projectile to grabbing and throwing objects in the gravity sandbox.
+
+Each mission uses a different interaction model:
+
+- **Projectile Motion:** prediction, aiming, launching, trajectory observation, and reflection
+- **Electricity:** short Ohm's Law challenges with immediate feedback
+- **Gravity Sandbox:** open-ended experimentation with motion, force, mass, and gravity
+
+---
+
+## How to Play
+
+### 1. Choose a Mission
+
+Start from the world map and select a physics activity.
+
+### 2. Interact and Experiment
+
+Each mission has its own controls and learning style.
+
+- **Projectile Motion:** predict an angle, aim, launch, observe the trajectory, and compare attempts
+- **Electricity:** solve short Ohm's Law challenges and receive immediate feedback
+- **Gravity Sandbox:** spawn objects, change gravity, inspect physical values, and experiment with motion
+
+### 3. Use Hand Tracking Where Available
+
+Selected activities support camera-based hand gestures.
+
+Alternative controls are available in supported parts of the experience, so the core project does not rely entirely on camera input.
+
+### 4. Observe and Reflect
+
+The experience encourages students to compare what they expected with what actually happened.
+
+The goal is to build understanding through experimentation rather than memorization alone.
 
 ---
 
@@ -77,7 +112,7 @@ The project focuses on:
 - encouraging experimentation instead of memorization alone,
 - and providing browser-based learning experiences that can be accessed without specialized equipment.
 
-The project is designed as an educational prototype showing how familiar internet-style humor and game-like interactions can be used to make STEM learning more approachable. Learning gains and classroom impact have not yet been measured; this is an intended contribution to SDG 4, not a claim of proven outcomes or UN endorsement.
+As an educational prototype, Physics Meme Lab explores how interactive, game-like learning can contribute to more engaging and approachable STEM education.
 
 ---
 
@@ -124,7 +159,9 @@ Students can:
 - inspect physical values such as mass, force, and speed,
 - and interact with objects using camera-based hand gestures.
 
-The sandbox encourages experimentation and observation instead of requiring a single correct solution. Sidebar controls add objects and adjust gravity; grabbing and throwing require camera hand tracking. Direct mouse/touch dragging is not available in this sandbox.
+The sandbox encourages experimentation and observation instead of requiring a single correct solution.
+
+Sidebar controls can be used to add objects and adjust gravity. Grabbing and throwing objects use camera-based hand tracking.
 
 ---
 
@@ -136,11 +173,11 @@ Physics Meme Lab supports multiple interaction methods depending on the activity
 
 Selected activities use real-time hand tracking through the device camera.
 
-For example, students can use hand movements to interact with objects and control parts of the simulation.
+Students can use hand movements to interact with parts of the simulation, including aiming and object manipulation.
 
 ### Alternative Controls
 
-Where supported, alternative mouse, keyboard, or on-screen controls are provided so the core experience does not depend entirely on camera input.
+Where supported, mouse, keyboard, or on-screen controls are available so the experience does not depend entirely on camera input.
 
 ---
 
@@ -183,11 +220,11 @@ Physics Meme Lab does not require users to create an account.
 
 Camera access is requested only when a hand-tracking feature requires it.
 
-Camera frames are processed locally in the browser for interaction purposes. The application does not record, save, or upload camera footage.
+Camera frames are processed locally in the browser for interaction purposes. The application does not intentionally record, save, or upload camera footage.
 
-Hand tracking downloads runtime/model files from jsDelivr and Google-hosted MediaPipe resources, so initial setup needs internet access. These providers receive ordinary connection metadata. Camera access requires HTTPS or localhost and depends on browser/device support.
+Hand tracking downloads required runtime/model files from external MediaPipe hosting resources, so initial setup requires an internet connection.
 
-Progress, audio settings, and optional layout preferences are stored in localStorage. Clear this site’s browser data to remove them. Session reflections remain in application memory.
+Progress and supported preferences are stored locally in the browser.
 
 Users can also use available alternative controls when they do not want to use camera-based interaction.
 
@@ -197,7 +234,7 @@ Users can also use available alternative controls when they do not want to use c
 
 ### Requirements
 
-- Node.js 22.12+ (or a newer supported version)
+- Node.js 22.12+ or a newer supported version
 - npm
 - A modern web browser
 
@@ -233,7 +270,7 @@ This structure allows each physics activity to have its own interaction model wh
 
 ## Development and Testing
 
-Run the repository checks with:
+The project can be checked with:
 
 ```bash
 npm run lint
@@ -241,15 +278,22 @@ npm test -- --run
 npm run build
 ```
 
-The submission checks pass lint, **29 automated tests**, and the production build. Tests cover physics, mission and application state, input capability, gravity gestures, electricity answers, and landing layout. The production output is written to `dist/`.
+For this submission build:
 
-Automated checks do not establish camera reliability or compatibility on every device.
+- lint passed,
+- **29 automated tests passed**,
+- production build passed,
+- and manual gameplay smoke testing was completed.
+
+Automated tests cover physics logic, mission and application state, input capability, gravity gestures, electricity answers, and landing layout.
 
 ---
 
 ## Project History and Submission Note
 
-Physics Meme Lab was developed before this event as a student physics-learning hackathon prototype. This submission adapts that existing project; it does not claim that the entire application was created during the current event. The existing physics and gameplay are retained.
+Physics Meme Lab was originally developed before this event as a student physics-learning hackathon prototype.
+
+This submission adapts that existing project and does not claim that the entire application was created during the current event.
 
 For this international SDG-focused submission, the project was further adapted with:
 
@@ -267,17 +311,15 @@ The core purpose remains the same:
 
 ## Team & Contributions
 
-The student team’s work represented in this repository includes:
+The student team's work represented in this repository includes:
 
-- **Project concept & learning experience:** prediction, experimentation, comparison, and concept reflection.
-- **Frontend & interactions:** React/TypeScript screens, navigation, and supported mouse, keyboard, and on-screen controls.
-- **Physics gameplay & simulation:** projectile motion, gravity simulation, and the Ohm’s law activity.
-- **Hand tracking integration:** browser-based MediaPipe detection and gesture controls.
-- **UI/UX & visual design:** mission interfaces, world map, visual feedback, and character presentation.
-- **Testing & iteration:** automated checks for physics, state, controls, and layout.
-- **International English adaptation & SDG 4 positioning:** English interface copy and educational submission documentation.
-
-These are project-level contributions; individual member assignments are not specified.
+- **Project concept & learning experience:** prediction, experimentation, comparison, and concept reflection
+- **Frontend & interactions:** React/TypeScript screens, navigation, and supported mouse, keyboard, and on-screen controls
+- **Physics gameplay & simulation:** projectile motion, gravity simulation, and the Ohm's Law activity
+- **Hand tracking integration:** browser-based MediaPipe detection and gesture controls
+- **UI/UX & visual design:** mission interfaces, world map, visual feedback, and character presentation
+- **Testing & iteration:** automated checks for physics, state, controls, and layout
+- **International adaptation & SDG 4 positioning:** English interface copy and educational submission documentation
 
 ---
 
