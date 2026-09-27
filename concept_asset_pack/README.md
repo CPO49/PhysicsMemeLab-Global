@@ -1,4 +1,4 @@
-# 67HACK Asset Pack
+# Physics Meme Lab Concept Asset Pack
 
 ชุด asset concept สำหรับแทน CSS primitive ใน Landing และ World Map
 

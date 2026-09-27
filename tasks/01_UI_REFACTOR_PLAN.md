@@ -1,7 +1,7 @@
 # UI Refactor Plan
 
 ## Phase 0 — Safety and audit
-- Read AGENTS.md and all project docs
+- Read all project docs
 - Check git status
 - Create checkpoint commit if needed
 - Audit reusable camera, gesture, physics, and learning logic

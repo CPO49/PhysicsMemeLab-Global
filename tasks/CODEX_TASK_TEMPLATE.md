@@ -12,7 +12,7 @@ Relevant files and existing behavior.
 - [ ] Tests/build pass
 
 ## Constraints
-- Follow `AGENTS.md`
+- Follow the project specifications in `docs/` and `design/`
 - Preserve design tokens and approved Thai copy
 - Do not add unrelated features
 

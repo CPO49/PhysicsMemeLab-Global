@@ -20,7 +20,7 @@ It must not feel like:
 - a finance/admin dashboard
 - a mobile gacha shop
 - a generic school LMS
-- an Angry Birds clone
+- a clone of an existing commercial game
 
 ## Visual balance
 - 60% clear learning/game UX
@@ -135,6 +135,6 @@ During aiming and simulation:
 - Returning to full dark-dashboard theme
 - Adding shop/currency economy
 - Replacing world map with a plain card grid
-- Using copyrighted Angry Birds assets
+- Using third-party game assets without permission
 - Making every screen visually chaotic
 - Hiding learning evidence behind game scores only

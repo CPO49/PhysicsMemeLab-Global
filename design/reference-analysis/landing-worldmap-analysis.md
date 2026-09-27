@@ -22,7 +22,7 @@ Source image: `design/references/approved_landing_worldmap_reference.png` (1448 
 | Supporting sentence | About 24–30% of page width | Below headline; short navy copy, clearly separated from the primary action. |
 | Primary + secondary actions | 2 buttons in one row/group | Mid-left. Primary is visually strongest; secondary is present but quieter. |
 | Control option cards | 3 equal compact cards across lower left | Camera, hands, mouse fallback. They share a baseline and are not a large enclosing card. |
-| Mascot | 58–63% of page width visual area | Right side; largest focal object, cropped only by the artwork’s natural transparent bounds. Face, hands, Tung Tung, and feet remain visible. |
+| Mascot | 58–63% of page width visual area | Right side; largest focal object, cropped only by the artwork’s natural transparent bounds. The mascot’s face, hands, and feet remain visible. |
 
 ### Exact component count in the approved composition
 

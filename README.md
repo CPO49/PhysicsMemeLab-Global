@@ -2,7 +2,7 @@
 
 **Physics Meme Lab** is an interactive, meme-inspired physics learning experience designed to make abstract science concepts easier to understand through play.
 
-Instead of only memorizing formulas, students can experiment with physics concepts through interactive missions, visual feedback, hand gestures, and playful original characters.
+Instead of only memorizing formulas, students can experiment with physics concepts through interactive missions, visual feedback, hand gestures, and playful meme-inspired characters.
 
 > **Aligned with UN Sustainable Development Goal 4: Quality Education**
 
@@ -14,6 +14,10 @@ Instead of only memorizing formulas, students can experiment with physics concep
 https://physicsmemelab-global.vercel.app/
 
 The project runs directly in a modern web browser.
+
+**Source:** [PhysicsMemeLab-Global](https://github.com/CPO49/PhysicsMemeLab-Global)
+
+Prepared for the **Acodemic × G.I.R.L.S. Global SDG Hackathon**.
 
 Camera access is used only for optional hand-tracking interactions. Alternative controls are available in supported parts of the experience.
 
@@ -48,6 +52,20 @@ The goal is not to replace traditional lessons, but to give students another way
 
 ---
 
+## What Makes It Different
+
+Physics itself is part of the interaction. In the projectile mission, students predict a launch angle, experiment, observe the trajectory, compare attempts, and answer a concept question.
+
+The learning loop is:
+
+**Predict → Experiment → Observe → Compare → Understand**
+
+Meme-inspired characters and playful scenarios serve as memorable learning cues. Selected activities use browser-based hand tracking to make physical gestures part of the experiment, from aiming a projectile to grabbing and throwing objects in the gravity sandbox.
+
+Electricity offers a short Ohm’s law challenge, while gravity supports open-ended exploration; each activity uses its own interaction model.
+
+---
+
 ## UN SDG 4 — Quality Education
 
 Physics Meme Lab supports **UN Sustainable Development Goal 4: Quality Education** by exploring a more engaging and accessible way to learn science.
@@ -59,7 +77,7 @@ The project focuses on:
 - encouraging experimentation instead of memorization alone,
 - and providing browser-based learning experiences that can be accessed without specialized equipment.
 
-The project is designed as an educational prototype showing how familiar internet-style humor and game-like interactions can be used to make STEM learning more approachable.
+The project is designed as an educational prototype showing how familiar internet-style humor and game-like interactions can be used to make STEM learning more approachable. Learning gains and classroom impact have not yet been measured; this is an intended contribution to SDG 4, not a claim of proven outcomes or UN endorsement.
 
 ---
 
@@ -106,7 +124,7 @@ Students can:
 - inspect physical values such as mass, force, and speed,
 - and interact with objects using camera-based hand gestures.
 
-The sandbox encourages experimentation and observation instead of requiring a single correct solution.
+The sandbox encourages experimentation and observation instead of requiring a single correct solution. Sidebar controls add objects and adjust gravity; grabbing and throwing require camera hand tracking. Direct mouse/touch dragging is not available in this sandbox.
 
 ---
 
@@ -137,7 +155,7 @@ Where supported, alternative mouse, keyboard, or on-screen controls are provided
 - World-map style mission progression
 - Learning questions and feedback
 - Local progress storage
-- Original meme-inspired visual assets
+- Meme-inspired characters and visual learning cues
 - Browser-based experience
 - No account required
 
@@ -165,7 +183,11 @@ Physics Meme Lab does not require users to create an account.
 
 Camera access is requested only when a hand-tracking feature requires it.
 
-Camera frames are processed locally in the browser for interaction purposes and are not intentionally uploaded or stored by the application.
+Camera frames are processed locally in the browser for interaction purposes. The application does not record, save, or upload camera footage.
+
+Hand tracking downloads runtime/model files from jsDelivr and Google-hosted MediaPipe resources, so initial setup needs internet access. These providers receive ordinary connection metadata. Camera access requires HTTPS or localhost and depends on browser/device support.
+
+Progress, audio settings, and optional layout preferences are stored in localStorage. Clear this site’s browser data to remove them. Session reflections remain in application memory.
 
 Users can also use available alternative controls when they do not want to use camera-based interaction.
 
@@ -175,7 +197,7 @@ Users can also use available alternative controls when they do not want to use c
 
 ### Requirements
 
-- Node.js
+- Node.js 22.12+ (or a newer supported version)
 - npm
 - A modern web browser
 
@@ -184,7 +206,7 @@ Users can also use available alternative controls when they do not want to use c
 ```bash
 git clone https://github.com/CPO49/PhysicsMemeLab-Global.git
 cd PhysicsMemeLab-Global
-npm install
+npm ci
 npm run dev
 ```
 
@@ -211,25 +233,28 @@ This structure allows each physics activity to have its own interaction model wh
 
 ## Development and Testing
 
-Before this submission build was prepared, the project was checked through:
+Run the repository checks with:
 
-- linting,
-- automated tests,
-- production build verification,
-- and manual gameplay smoke testing.
+```bash
+npm run lint
+npm test -- --run
+npm run build
+```
 
-The current submission build successfully completed **29 automated tests** and a production build.
+The submission checks pass lint, **29 automated tests**, and the production build. Tests cover physics, mission and application state, input capability, gravity gestures, electricity answers, and landing layout. The production output is written to `dist/`.
+
+Automated checks do not establish camera reliability or compatibility on every device.
 
 ---
 
 ## Project History and Submission Note
 
-Physics Meme Lab was originally developed as a student physics-learning project.
+Physics Meme Lab was developed before this event as a student physics-learning hackathon prototype. This submission adapts that existing project; it does not claim that the entire application was created during the current event. The existing physics and gameplay are retained.
 
 For this international SDG-focused submission, the project was further adapted with:
 
 - an English-language interface,
-- original visual assets,
+- refreshed character presentation,
 - improved international presentation,
 - clearer educational positioning,
 - and explicit alignment with **UN SDG 4: Quality Education**.
@@ -240,15 +265,19 @@ The core purpose remains the same:
 
 ---
 
-## Team
+## Team & Contributions
 
-Developed by a student team interested in combining:
+The student team’s work represented in this repository includes:
 
-- software development,
-- interactive learning,
-- physics,
-- game design,
-- and creative technology.
+- **Project concept & learning experience:** prediction, experimentation, comparison, and concept reflection.
+- **Frontend & interactions:** React/TypeScript screens, navigation, and supported mouse, keyboard, and on-screen controls.
+- **Physics gameplay & simulation:** projectile motion, gravity simulation, and the Ohm’s law activity.
+- **Hand tracking integration:** browser-based MediaPipe detection and gesture controls.
+- **UI/UX & visual design:** mission interfaces, world map, visual feedback, and character presentation.
+- **Testing & iteration:** automated checks for physics, state, controls, and layout.
+- **International English adaptation & SDG 4 positioning:** English interface copy and educational submission documentation.
+
+These are project-level contributions; individual member assignments are not specified.
 
 ---
 

@@ -50,4 +50,4 @@ Predict → Perform gesture → Observe trajectory → Compare attempts → Expl
 - No production database
 - No shop, real currency, ranking, or multiplayer
 - Camera is primary, mouse/touch fallback is mandatory
-- Original mascot and assets only; do not use Angry Birds intellectual property
+- Use original or appropriately licensed mascots and assets; respect third-party intellectual property
